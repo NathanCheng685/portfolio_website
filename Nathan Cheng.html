@@ -235,8 +235,11 @@ nav.topnav { position: sticky; top: 0; z-index: 50;
 }
 .product-name { font-family: var(--font-serif); font-size: 22px; font-weight: 500;
   color: var(--ink); letter-spacing: -0.01em; flex-grow: 1; min-width: 0; line-height: 1.15;
+  text-decoration: none;
 }
+a.product-name:hover { color: var(--accent); }
 .product-name em { font-style: italic; }
+.product-head > a:first-child { flex-shrink: 0; align-self: flex-start; display: inline-flex; }
 .product-icons { display: flex; gap: 6px; align-items: center; }
 .icon-btn { display: inline-flex; align-items: center; justify-content: center;
   width: 32px; height: 32px; background: var(--bg); border-radius: 999px;
@@ -415,6 +418,8 @@ nav.topnav { position: sticky; top: 0; z-index: 50;
 .lead-title { font-family: var(--font-serif); font-size: 19px; font-weight: 500;
   letter-spacing: -0.01em; color: var(--ink);
 }
+.lead-title a { color: var(--ink); text-decoration: none; }
+.lead-title a:hover { color: var(--accent); }
 .lead-meta { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-muted);
   letter-spacing: 0.06em; text-transform: uppercase;
 }
@@ -425,6 +430,13 @@ nav.topnav { position: sticky; top: 0; z-index: 50;
 .lead-body p + p { margin-top: 6px; }
 
 /* footer */
+#contact .card {
+  color: var(--ink-soft);
+}
+#contact .card a {
+  color: var(--accent);
+}
+
 footer { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--rule);
   font-size: 12px; color: var(--ink-muted); font-family: var(--font-mono);
   display: flex; justify-content: space-between; flex-wrap: wrap;
@@ -470,7 +482,7 @@ footer { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--rule);
   </div>
 </nav>
 
-<div class="page" id="top" style="color: rgb(223, 221, 218)">
+<div class="page" id="top">
 
 <!-- Hero -->
 <header class="hero">
@@ -829,7 +841,7 @@ footer { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--rule);
           <img class="lead-logo" src="https://www.google.com/s2/favicons?domain=cssaud.com&sz=128" alt="HKU CSSAUD">
           <div class="lead-body">
             <div class="lead-toprow">
-              <div class="lead-title"><a href="https://cssaud.com/" target="_blank" rel="noopener" style="text-decoration: none; color: var(--ink);">HKU CSSAUD</a></div>
+              <div class="lead-title"><a href="https://cssaud.com/" target="_blank" rel="noopener">HKU CSSAUD</a></div>
               <div class="lead-meta">Oct 2023 — Oct 2024</div>
             </div>
             <div class="lead-role">Cultural &amp; Recreation Secretary</div>
@@ -848,8 +860,10 @@ footer { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--rule);
       <div class="col-stack">
         <div class="card" id="entry-vstandby">
           <div class="product-head">
-            <img class="product-logo" src="https://www.google.com/s2/favicons?domain=cofun.harrycn.com&sz=128" alt="VStandby">
-            <span class="product-name">VStandby <em>Studio</em></span>
+            <a href="https://cofun.harrycn.com/#product" target="_blank" rel="noopener" aria-label="VStandby Studio — product page">
+              <img class="product-logo" src="https://www.google.com/s2/favicons?domain=cofun.harrycn.com&sz=128" alt="VStandby">
+            </a>
+            <a class="product-name" href="https://cofun.harrycn.com/#product" target="_blank" rel="noopener">VStandby <em>Studio</em></a>
             <div class="product-icons">
               <a class="icon-btn" href="https://github.com/srbisupermeni/4-26hack/tree/mode-system" target="_blank" rel="noopener" title="GitHub repo">
                 <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
@@ -879,8 +893,10 @@ footer { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--rule);
 
         <div class="card" id="entry-welldify">
           <div class="product-head">
-            <img class="product-logo" src="https://www.google.com/s2/favicons?domain=welldify.io&sz=128" alt="Welldify">
-            <span class="product-name">Welldify <em>AI Wellbeing Coach</em></span>
+            <a href="https://www.welldify.io/" target="_blank" rel="noopener" aria-label="Welldify — website">
+              <img class="product-logo" src="https://www.google.com/s2/favicons?domain=welldify.io&sz=128" alt="Welldify">
+            </a>
+            <a class="product-name" href="https://www.welldify.io/" target="_blank" rel="noopener">Welldify <em>AI Wellbeing Coach</em></a>
             <div class="product-icons">
               <a class="icon-btn primary" href="https://www.welldify.io/" target="_blank" rel="noopener" title="welldify.io">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
