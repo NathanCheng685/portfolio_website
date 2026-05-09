@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nathan Cheng — edited</title>
+<meta name="description" content="A cognitive science researcher moving toward product.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: rgb(227, 224, 220);
+  --bg-2: rgb(218, 215, 210);
+  --card: #FFFEFC;
+  --skill: rgb(230, 229, 226);
+
+  --ink: #14110C;
+  --ink-soft: #3F3A2F;
+  --ink-muted: #6B6253;
+  --ink-faint: #9C9583;
+
+  --rule: rgba(20, 17, 12, 0.08);
+  --rule-strong: rgba(20, 17, 12, 0.16);
+  --shadow-card: 0 1px 2px rgba(20, 17, 12, 0.04), 0 8px 24px -8px rgba(20, 17, 12, 0.08);
+  --shadow-card-hover: 0 2px 4px rgba(20, 17, 12, 0.06), 0 16px 36px -12px rgba(20, 17, 12, 0.14);
+
+  --accent: #B5462E;
+  --accent-soft: #E9D5C4;
+
+  --r-lg: 18px;
+  --r-md: 12px;
+  --r-sm: 6px;
+
+  --font-serif: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.65;
+  font-size: 15.5px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+a { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color .15s ease, background .15s ease; }
+a:hover { color: var(--accent); }
+
+/* nav */
+nav.topnav { position: sticky; top: 0; z-index: 50;
+  background: color-mix(in oklab, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+}
+.topnav-inner { max-width: 1280px; margin: 0 auto; padding: 16px 48px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.topnav .brand { font-family: var(--font-serif); font-size: 19px; font-weight: 500; font-style: italic;
+  color: var(--ink); letter-spacing: -0.01em; text-decoration: none; }
+.topnav .brand:hover { color: var(--accent); }
+.topnav-links { display: flex; gap: 24px; font-size: 13.5px; }
+.topnav-links a { color: var(--ink-soft); text-decoration: none; font-weight: 500; letter-spacing: 0.01em; }
+.topnav-links a:hover { color: var(--accent); }
+
+/* page */
+.page { max-width: 1280px; margin: 0 auto; padding: 56px 48px 120px; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: 130px 1fr; gap: 32px; align-items: center;
+  margin-bottom: 72px; max-width: 820px; animation: fadeIn 0.5s ease-out;
+}
+.hero-illustration { width: 130px; height: 130px; position: relative; }
+.hero-illustration .avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
+  background: var(--card); display: block; box-shadow: var(--shadow-card);
+}
+.hero-illustration .sparkle { position: absolute; top: -4px; right: -4px; width: 18px; height: 18px; }
+.hero-illustration .sparkle path { fill: var(--ink); }
+.hero-meta h1 { font-family: var(--font-serif); font-size: 56px; font-weight: 600;
+  line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 14px;
+  color: var(--ink);
+}
+.hero-meta .role { font-family: var(--font-serif); font-style: italic;
+  font-size: 19px; color: var(--ink-soft); margin-bottom: 18px; line-height: 1.45; max-width: 560px;
+}
+.contact-icons { display: flex; gap: 8px; font-size: 13px; flex-wrap: wrap; }
+.contact-icons a { display: inline-flex; align-items: center; gap: 6px;
+  color: var(--ink); text-decoration: none; padding: 7px 12px; background: var(--card);
+  border-radius: 999px; font-weight: 500; letter-spacing: 0.01em; box-shadow: var(--shadow-card);
+}
+.contact-icons a:hover { color: var(--accent); }
+.contact-icons svg { width: 14px; height: 14px; }
+
+/* magazine grid sections */
+.spread { margin-bottom: 96px; animation: fadeIn 0.6s ease-out 0.1s backwards; }
+.spread-grid { display: grid; gap: 28px 56px; align-items: start; }
+.spread-grid.split-7-5 { grid-template-columns: 1.4fr 1fr; }
+.spread-grid.split-5-7 { grid-template-columns: 1fr 1.4fr; }
+.spread-grid.split-1-1 { grid-template-columns: 1fr 1fr; }
+/* Education row: schools use remaining width; coursework is a narrow folded strip */
+.spread-grid.split-edu-cw {
+  grid-template-columns: minmax(0, 1fr) clamp(200px, 26vw, 300px);
+  gap: 28px 24px;
+  align-items: start;
+}
+#sec-edu > .spread-grid > div:first-child { min-width: 0; }
+#sec-coursework { min-width: 0; max-width: 100%; }
+
+.col-head { margin-bottom: 18px; }
+.col-head .num {
+  font-family: var(--font-mono); font-size: 11px; font-weight: 500;
+  color: var(--ink-faint); letter-spacing: 0.18em; text-transform: uppercase;
+  display: block; margin-bottom: 4px;
+}
+.col-head h2 {
+  font-family: var(--font-serif); font-size: 30px; font-weight: 500;
+  color: var(--ink); letter-spacing: -0.02em; line-height: 1.05;
+}
+.col-head h2 em { font-style: italic; }
+.col-head .sub {
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 14.5px; color: var(--ink-muted); margin-top: 4px;
+}
+
+.col-stack { display: flex; flex-direction: column; gap: 18px; }
+.col-stack > * { scroll-margin-top: 80px; }
+
+/* card */
+.card { background: var(--card); border-radius: var(--r-lg);
+  padding: 22px 24px; position: relative; box-shadow: var(--shadow-card);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card-hover); }
+.card.soft { padding: 18px 20px; }
+
+.entry-head { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 4px; }
+.entry-logo { width: 40px; height: 40px; border-radius: var(--r-sm);
+  background: var(--bg); padding: 5px; object-fit: contain; flex-shrink: 0;
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.entry-info { flex: 1; min-width: 0; }
+.entry-toprow { display: flex; justify-content: space-between; align-items: baseline;
+  gap: 10px; flex-wrap: wrap;
+}
+.entry-title { font-family: var(--font-serif); font-size: 19px; font-weight: 500;
+  color: var(--ink); letter-spacing: -0.01em; line-height: 1.25;
+}
+.entry-title a { color: var(--ink); text-decoration: none; }
+.entry-title a:hover { color: var(--accent); }
+.entry-place { color: var(--ink-muted); font-weight: 400; }
+.entry-date { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-muted);
+  letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap;
+}
+.entry-meta { font-size: 13.5px; color: var(--ink-muted); margin-top: 2px; }
+.entry-meta em { font-style: italic; }
+.entry-body { font-size: 14.5px; color: var(--ink-soft); line-height: 1.7; margin-top: 12px; }
+.entry-body p { margin-bottom: 8px; }
+.entry-body > ul, .proj ul, .product-body ul, .lead-body ul {
+  list-style: none; margin-top: 6px; padding: 0;
+}
+.entry-body > ul li, .proj li, .product-body li, .lead-body ul li {
+  padding-left: 18px; position: relative; margin-bottom: 5px;
+  color: var(--ink-soft); font-size: 14px; line-height: 1.6;
+}
+.entry-body > ul li::before, .proj li::before, .product-body li::before, .lead-body ul li::before {
+  content: ''; position: absolute; left: 4px; top: 11px;
+  width: 6px; height: 1.5px; background: var(--ink-faint); border-radius: 1px;
+}
+
+/* projects within research */
+.proj { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--rule); }
+.proj-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; flex-wrap: wrap; }
+.proj-label { font-family: var(--font-mono); font-size: 9.5px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.16em; color: var(--ink-muted);
+}
+.proj-title { font-size: 16px; font-weight: 500; color: var(--ink);
+  font-family: var(--font-serif); letter-spacing: -0.005em;
+}
+
+/* tags */
+.tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+.tag { font-family: var(--font-mono); font-size: 10.5px;
+  padding: 4px 9px; background: var(--skill); color: var(--ink-soft);
+  letter-spacing: 0.02em; border-radius: 999px; font-weight: 500;
+  text-decoration: none; transition: background .15s ease, color .15s ease; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 4px;
+}
+.tag:hover { background: var(--ink); color: var(--card); }
+.tag.is-target { animation: pulseHi 1.4s ease-out; }
+@keyframes pulseHi {
+  0%   { background: var(--accent-soft); transform: scale(1); }
+  30%  { background: var(--accent); color: var(--card); transform: scale(1.06); }
+  100% { background: var(--skill); transform: scale(1); }
+}
+
+/* education compact card */
+.edu-row { display: grid; grid-template-columns: 50px 1fr; gap: 16px;
+  background: var(--card); border-radius: var(--r-lg); padding: 20px 22px;
+  box-shadow: var(--shadow-card);
+}
+.edu-logo { width: 50px; height: 50px; border-radius: var(--r-md);
+  background: var(--bg); padding: 7px; object-fit: contain;
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.edu-body { min-width: 0; }
+.edu-toprow { display: flex; justify-content: space-between; align-items: baseline;
+  gap: 12px; flex-wrap: wrap; margin-bottom: 2px;
+}
+.edu-school { font-family: var(--font-serif); font-size: 20px; font-weight: 600;
+  letter-spacing: -0.01em; color: var(--ink); line-height: 1.2;
+}
+.edu-place { font-family: var(--font-serif); font-style: italic;
+  font-size: 14px; color: var(--ink-muted);
+}
+.edu-deg-row { display: flex; justify-content: space-between; align-items: baseline;
+  gap: 12px; flex-wrap: wrap; font-size: 14px; color: var(--ink-soft); margin-bottom: 6px;
+}
+.edu-deg-row .when { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-muted);
+  letter-spacing: 0.05em; text-transform: uppercase;
+}
+.edu-list { list-style: none; padding: 0; margin: 4px 0 0; }
+.edu-list li { padding-left: 18px; position: relative; margin-bottom: 4px;
+  color: var(--ink-soft); font-size: 13.5px; line-height: 1.5;
+}
+.edu-list li::before { content: ''; position: absolute; left: 4px; top: 9px;
+  width: 6px; height: 1.5px; background: var(--ink-faint);
+}
+/* product */
+.product-head { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; flex-wrap: wrap; }
+.product-head > a:first-child { flex-shrink: 0; align-self: flex-start; display: inline-flex; }
+.product-logo { width: 44px; height: 44px; border-radius: var(--r-md);
+  background: var(--bg); padding: 6px; object-fit: contain; flex-shrink: 0;
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.product-name { font-family: var(--font-serif); font-size: 22px; font-weight: 500;
+  color: var(--ink); letter-spacing: -0.01em; flex-grow: 1; min-width: 0; line-height: 1.15;
+  text-decoration: none;
+}
+a.product-name:hover { color: var(--accent); }
+.product-name em { font-style: italic; }
+.product-icons { display: flex; gap: 6px; align-items: center; }
+.icon-btn { display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; background: var(--bg); border-radius: 999px;
+  color: var(--ink); text-decoration: none; transition: all 0.15s ease;
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.icon-btn:hover { background: var(--ink); color: var(--card); box-shadow: none; }
+.icon-btn.primary { background: var(--ink); color: var(--card); box-shadow: none; }
+.icon-btn.primary:hover { background: var(--accent); }
+.icon-btn svg { width: 15px; height: 15px; }
+.product-meta { font-size: 13px; color: var(--ink-muted); margin: 6px 0 10px; }
+.product-meta em { font-style: italic; }
+.product-body { font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+.product-body p { margin-bottom: 6px; }
+.product-body code { font-family: var(--font-mono); font-size: 12px;
+  background: var(--bg); padding: 1px 5px; border-radius: 3px; color: var(--ink);
+}
+
+/* coursework: subjects as columns — swipe sideways; scroll each list vertically */
+.cw-panel { padding: 14px 12px 16px; overflow: hidden; }
+.cw-rail {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding: 2px 2px 12px;
+  margin: 0 -2px;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+.cw-rail::-webkit-scrollbar { height: 6px; }
+.cw-rail::-webkit-scrollbar-thumb { background: var(--rule-strong); border-radius: 99px; }
+.cw-col {
+  flex: 0 0 auto;
+  width: 188px;
+  min-width: 168px;
+  max-width: 200px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+}
+.cw-col-head {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 8px;
+  font-family: var(--font-serif); font-size: 14px; font-weight: 600;
+  color: var(--ink); margin-bottom: 6px;
+  padding-bottom: 5px; border-bottom: 1px solid var(--rule);
+}
+.cw-col-head .count { font-family: var(--font-mono); font-size: 9.5px;
+  color: var(--ink-faint); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 400;
+}
+.cw-list-scroll {
+  max-height: 10.25rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 2px;
+  scrollbar-width: thin;
+}
+.cw-list-scroll::-webkit-scrollbar { width: 5px; }
+.cw-list-scroll::-webkit-scrollbar-thumb { background: var(--rule-strong); border-radius: 99px; }
+
+/* Coursework beside education: ~1.5 columns visible; bigger type; lists scroll only vertically */
+#sec-coursework .col-head { margin-bottom: 14px; }
+#sec-coursework .col-head h2 { font-size: 24px !important; }
+#sec-coursework .col-head .sub { font-size: 13px; line-height: 1.4; }
+#sec-coursework .cw-panel { padding: 14px 10px 14px; overflow: hidden; }
+#sec-coursework .cw-rail {
+  gap: 10px;
+  padding: 2px 0 10px;
+  margin: 0;
+  scroll-snap-type: x proximity;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+#sec-coursework .cw-col {
+  flex: 0 0 calc(100% / 1.5 - 5px);
+  min-width: 0;
+  max-width: none;
+  width: auto;
+  overflow-x: hidden;
+  scroll-snap-align: start;
+}
+#sec-coursework .cw-col-head {
+  font-size: 13.5px;
+  margin-bottom: 6px;
+  padding-bottom: 6px;
+}
+#sec-coursework .cw-col-head .count { font-size: 9.5px; }
+#sec-coursework .cw-item { padding: 6px 0; }
+#sec-coursework .cw-code { font-size: 9.5px; }
+#sec-coursework .cw-when {
+  font-size: 9px;
+  white-space: normal;
+  text-align: right;
+  max-width: 52%;
+  line-height: 1.25;
+}
+#sec-coursework .cw-name {
+  font-size: 13.5px;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+#sec-coursework .cw-list-scroll {
+  max-height: 14rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+#sec-coursework .cw-item-top {
+  flex-wrap: wrap;
+  gap: 4px 6px;
+  min-width: 0;
+}
+
+.cw-list { list-style: none; padding: 0; margin: 0; }
+.cw-item { padding: 6px 0; border-bottom: 1px dashed var(--rule); }
+.cw-item:last-child { border-bottom: none; }
+.cw-item-top { display: flex; justify-content: space-between; align-items: baseline;
+  gap: 8px; margin-bottom: 1px;
+}
+.cw-code { font-family: var(--font-mono); font-size: 9.5px; color: var(--ink-muted);
+  letter-spacing: 0.04em; font-weight: 600;
+}
+.cw-when { font-family: var(--font-mono); font-size: 9.5px; color: var(--ink-faint);
+  letter-spacing: 0.04em; white-space: nowrap;
+}
+.cw-name { font-family: var(--font-serif); font-size: 14px; color: var(--ink);
+  font-weight: 500; line-height: 1.35;
+}
+
+/* skills */
+.skills { display: flex; flex-direction: column; gap: 10px; }
+.skill-row { padding: 14px 16px; background: var(--skill);
+  border-radius: var(--r-md); scroll-margin-top: 80px;
+}
+.skill-row.is-target { animation: pulseRow 1.4s ease-out; }
+@keyframes pulseRow {
+  0%   { box-shadow: 0 0 0 0 var(--accent); }
+  30%  { box-shadow: 0 0 0 4px var(--accent-soft); }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.skill-row-label { font-family: var(--font-mono); font-size: 10px;
+  color: var(--ink); margin-bottom: 6px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.14em;
+}
+.skill-row-items { font-size: 13.5px; color: var(--ink-soft); line-height: 1.55; }
+.skill-used { margin-top: 10px; padding-top: 8px;
+  border-top: 1px solid rgba(20, 17, 12, 0.07);
+  display: flex; flex-wrap: wrap; align-items: center; gap: 5px 6px;
+  font-family: var(--font-mono); font-size: 9px;
+  color: var(--ink-muted); letter-spacing: 0.1em; text-transform: uppercase;
+}
+.skill-used .label { font-weight: 600; }
+.skill-used a { display: inline-flex; align-items: center; gap: 3px;
+  font-family: var(--font-sans); font-size: 11px; letter-spacing: 0.01em; text-transform: none;
+  color: var(--ink); text-decoration: none;
+  padding: 2px 7px; background: var(--card); border-radius: 999px; font-weight: 500;
+  transition: background .15s ease, color .15s ease;
+}
+.skill-used a::before { content: '↗'; font-size: 10px; color: var(--ink-muted); }
+.skill-used a:hover { background: var(--ink); color: var(--card); }
+.skill-used a:hover::before { color: var(--card); }
+
+/* leadership */
+.lead-card { background: var(--card); border-radius: var(--r-lg);
+  padding: 22px 24px; box-shadow: var(--shadow-card);
+  display: grid; grid-template-columns: 50px 1fr; gap: 16px;
+}
+.lead-logo { width: 50px; height: 50px; border-radius: var(--r-md);
+  background: var(--bg); padding: 7px; object-fit: contain;
+  box-shadow: inset 0 0 0 1px var(--rule);
+}
+.lead-body { min-width: 0; }
+.lead-toprow { display: flex; justify-content: space-between; align-items: baseline;
+  gap: 12px; flex-wrap: wrap; margin-bottom: 4px;
+}
+.lead-title { font-family: var(--font-serif); font-size: 19px; font-weight: 500;
+  letter-spacing: -0.01em; color: var(--ink);
+}
+.lead-title a { color: var(--ink); text-decoration: none; }
+.lead-title a:hover { color: var(--accent); }
+.lead-meta { font-family: var(--font-mono); font-size: 10.5px; color: var(--ink-muted);
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.lead-role { font-family: var(--font-serif); font-style: italic;
+  font-size: 14px; color: var(--ink-muted); margin-bottom: 8px;
+}
+.lead-body p { font-size: 14px; color: var(--ink-soft); line-height: 1.7; }
+.lead-body p + p { margin-top: 6px; }
+
+/* footer */
+footer { margin-top: 80px; padding-top: 28px; border-top: 1px solid var(--rule);
+  font-size: 12px; color: var(--ink-muted); font-family: var(--font-mono);
+  display: flex; justify-content: space-between; flex-wrap: wrap;
+  gap: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+::selection { background: var(--ink); color: var(--bg); }
+
+@media (max-width: 900px) {
+  .topnav-inner { padding: 12px 22px; }
+  .topnav-links { gap: 14px; font-size: 12.5px; }
+  .page { padding: 36px 22px 80px; }
+  .hero { grid-template-columns: 90px 1fr; gap: 18px; margin-bottom: 48px; }
+  .hero-illustration { width: 90px; height: 90px; }
+  .hero-meta h1 { font-size: 40px; }
+  .hero-meta .role { font-size: 17px; }
+  .spread { margin-bottom: 64px; }
+  .spread-grid.split-edu-cw,
+  .spread-grid.split-7-5,
+  .spread-grid.split-5-7,
+  .spread-grid.split-1-1 { grid-template-columns: 1fr; gap: 36px; }
+  .col-head h2 { font-size: 26px; }
+  .card { padding: 18px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a href="#top" class="brand">Nathan Cheng</a>
+    <div class="topnav-links">
+      <a href="#sec-edu">Education</a>
+      <a href="#sec-research">Research</a>
+      <a href="#sec-products">Products</a>
+      <a href="#sec-skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page" id="top">
+
+<!-- Hero -->
+<header class="hero">
+  <div class="hero-illustration">
+    <img class="avatar" src="assets/nathan.jpg" alt="Nathan Cheng">
+    <svg class="sparkle" viewBox="-9 -9 18 18" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,-7 L1.5,-1.5 L7,0 L1.5,1.5 L0,7 L-1.5,1.5 L-7,0 L-1.5,-1.5 Z"/>
+    </svg>
+  </div>
+  <div class="hero-meta">
+    <h1>Nathan Cheng</h1>
+    <p class="role">A cognitive science researcher moving toward the product industry.</p>
+    <div class="contact-icons">
+      <a href="mailto:nathancheng685@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Email
+      </a>
+      <a href="https://www.linkedin.com/in/nathancheng685" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ╔════ Spread 01 — Education (left big) | Coursework (right small) ════╗ -->
+<section class="spread" id="sec-edu">
+  <div class="spread-grid split-edu-cw">
+    <div class="edu-column">
+      <div class="col-head">
+        <span class="num">01</span>
+        <h2><em>Education</em></h2>
+      </div>
+      <div class="col-stack">
+
+        <div class="edu-row">
+          <img class="edu-logo" src="https://www.google.com/s2/favicons?domain=hku.hk&sz=128" alt="HKU">
+          <div class="edu-body">
+            <div class="edu-toprow">
+              <div class="edu-school">The University of Hong Kong</div>
+              <div class="edu-place">Hong Kong</div>
+            </div>
+            <div class="edu-deg-row">
+              <span>Bachelor of Psychology</span>
+              <span class="when">Sep 2023 — May 2027</span>
+            </div>
+            <ul class="edu-list">
+              <li>GPA: 3.75 / 4.30</li>
+              <li>Dean's Honors List &middot; Faculty of Social Sciences, 2024–25</li>
+              <li>Lee Shau Kee Scholarship for Student Enrichment &middot; HKD 4,000 from HKU International Affairs Office (for the 2025–26 exchange at UC Berkeley)</li>
+              <li>Reaching Out Award &middot; HKD 6,000 from HKSAR Government Scholarship Fund (for exchange at Yonsei University, Seoul)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="edu-row">
+          <img class="edu-logo" src="https://www.google.com/s2/favicons?domain=berkeley.edu&sz=128" alt="UC Berkeley">
+          <div class="edu-body">
+            <div class="edu-toprow">
+              <div class="edu-school">University of California, Berkeley</div>
+              <div class="edu-place">United States</div>
+            </div>
+            <div class="edu-deg-row">
+              <span>Exchange &middot; Cognitive Science</span>
+              <span class="when">Jan 2026 — May 2026</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <aside id="sec-coursework">
+      <div class="col-head">
+        <span class="num">·</span>
+        <h2 style="font-size: 24px;"><em>Coursework</em></h2>
+        <div class="sub">Subjects scroll sideways · lists scroll vertically</div>
+      </div>
+
+      <div class="card soft cw-panel">
+        <div class="cw-rail" role="region" aria-label="Coursework by subject">
+          <div class="cw-col">
+            <div class="cw-col-head"><span>Computer Science</span><span class="count">4</span></div>
+            <ul class="cw-list cw-list-scroll">
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">CS 188</span><span class="cw-when">UCB · Sp 26</span></div><div class="cw-name">Introduction to Artificial Intelligence</div></li>
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">DATA C100</span><span class="cw-when">UCB · Sp 26</span></div><div class="cw-name">Principles of Data Science</div></li>
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">COMP1117</span><span class="cw-when">23–24 S1</span></div><div class="cw-name">Computer Programming</div></li>
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">SJTU</span><span class="cw-when">transfer</span></div><div class="cw-name">Algorithms and Analysis</div></li>
+            </ul>
+          </div>
+
+          <div class="cw-col">
+            <div class="cw-col-head"><span>Neuroscience</span><span class="count">3</span></div>
+            <ul class="cw-list cw-list-scroll">
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">PSYC3054</span><span class="cw-when">25–26 S1 · A−</span></div><div class="cw-name">Human Neuropsychology</div></li>
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">PSYC2101</span><span class="cw-when">24–25 S2 · A−</span></div><div class="cw-name">Foundations of Neuroscience I</div></li>
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">PSYC2022</span><span class="cw-when">24–25 S1 · A</span></div><div class="cw-name">Biological Psychology</div></li>
+            </ul>
+          </div>
+
+          <div class="cw-col">
+            <div class="cw-col-head"><span>Psychology</span><span class="count">11</span></div>
+            <ul class="cw-list cw-list-scroll">
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">COGSCI 131</span><span class="cw-when">UCB · Sp 26</span></div><div class="cw-name">Computational Models of Cognition</div></li>
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">PSYC2073</span><span class="cw-when">25–26 S1 · A+</span></div><div class="cw-name">Research Internship in Psychology II</div></li>
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">PSYC2019</span><span class="cw-when">25–26 S1 · A−</span></div><div class="cw-name">Psychology of Personality</div></li>
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">PSYC2067</span><span class="cw-when">24–25 S2 · A+</span></div><div class="cw-name">Seminars in Cognitive Science</div></li>
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">PSYC2071</span><span class="cw-when">24–25 S1 · A</span></div><div class="cw-name">Judgments and Decision Making</div></li>
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">PSYC2007</span><span class="cw-when">23–24 S2</span></div><div class="cw-name">Cognitive Psychology</div></li>
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">PSYC2060</span><span class="cw-when">23–24 S2</span></div><div class="cw-name">Research and Quantitative Methods</div></li>
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">PSYC2020</span><span class="cw-when">23–24 S2</span></div><div class="cw-name">Fundamentals of Social Psychology</div></li>
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">PSYC2009</span><span class="cw-when">23–24 S2</span></div><div class="cw-name">Life-span Developmental Psychology</div></li>
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">PSYC1004</span><span class="cw-when">23–24 S1 · A</span></div><div class="cw-name">Quantitative Methods in Psychology</div></li>
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">PSYC1001</span><span class="cw-when">23–24 S1 · A−</span></div><div class="cw-name">Introduction to Psychology</div></li>
+            </ul>
+          </div>
+
+          <div class="cw-col">
+            <div class="cw-col-head"><span>Linguistics</span><span class="count">2</span></div>
+            <ul class="cw-list cw-list-scroll">
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">LING2067</span><span class="cw-when">25–26 S1 · A+</span></div><div class="cw-name">Natural Language Processing</div></li>
+              <li class="cw-item"><div class="cw-item-top"><span class="cw-code">LING1000</span><span class="cw-when">24–25 S1 · A+</span></div><div class="cw-name">Introduction to Language</div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ╔════ Spread 02 — Skills (left small) | Research (right big) ════╗ -->
+<section class="spread" id="sec-research">
+  <div class="spread-grid split-5-7">
+    <aside id="sec-skills">
+      <div class="col-head">
+        <span class="num">02</span>
+        <h2 style="font-size: 26px;"><em>Skills</em></h2>
+        <div class="sub">Click any tag in a project to land here; chip back to jump to the project.</div>
+      </div>
+
+      <div class="skills">
+        <div class="skill-row" id="skill-programming">
+          <div class="skill-row-label">Programming</div>
+          <div class="skill-row-items">Python · MATLAB · Bash · Git · C++</div>
+          <div class="skill-used"><span class="label">Used in</span>
+            <a href="#entry-ccn">CCN Lab</a>
+            <a href="#entry-neurolead">NeuroLeaD</a>
+            <a href="#entry-vstandby">VStandby</a>
+          </div>
+        </div>
+        <div class="skill-row" id="skill-mlai">
+          <div class="skill-row-label">ML &amp; AI</div>
+          <div class="skill-row-items">Neural Networks · LLMs · OpenCV · NLP · Pandas · NumPy</div>
+          <div class="skill-used"><span class="label">Used in</span>
+            <a href="#entry-ccn">CCN Lab</a>
+            <a href="#entry-vstandby">VStandby</a>
+            <a href="#entry-welldify">Welldify</a>
+          </div>
+        </div>
+        <div class="skill-row" id="skill-neuro">
+          <div class="skill-row-label">Neuroimaging</div>
+          <div class="skill-row-items">SPM12 · Micapipe · MRIQC · BIDS · fsaverage · ArtRepair · fMRI</div>
+          <div class="skill-used"><span class="label">Used in</span>
+            <a href="#proj-asd">ASD</a>
+            <a href="#proj-language">Language Dev.</a>
+            <a href="#proj-reading">Reading</a>
+          </div>
+        </div>
+        <div class="skill-row" id="skill-stats">
+          <div class="skill-row-label">Statistics</div>
+          <div class="skill-row-items">GLM · ANOVA · Bayesian Methods · Statistical Inference · Research Design</div>
+          <div class="skill-used"><span class="label">Used in</span>
+            <a href="#proj-language">Language Dev.</a>
+            <a href="#proj-reading">Reading</a>
+            <a href="#entry-ccn">CCN Lab</a>
+          </div>
+        </div>
+        <div class="skill-row" id="skill-computing">
+          <div class="skill-row-label">Computing</div>
+          <div class="skill-row-items">HPC · Linux · Slurm · Shell scripting · Real-time systems</div>
+          <div class="skill-used"><span class="label">Used in</span>
+            <a href="#proj-asd">ASD</a>
+            <a href="#entry-vstandby">VStandby</a>
+          </div>
+        </div>
+        <div class="skill-row" id="skill-tools">
+          <div class="skill-row-label">Tools</div>
+          <div class="skill-row-items">Jamovi · Figma · DaVinci Resolve · Notion</div>
+          <div class="skill-used"><span class="label">Used in</span>
+            <a href="#proj-reading">Reading</a>
+            <a href="#entry-welldify-work">Welldify (work)</a>
+          </div>
+        </div>
+        <div class="skill-row" id="skill-languages">
+          <div class="skill-row-label">Languages</div>
+          <div class="skill-row-items">Mandarin (native) · English (fluent) · Cantonese (fluent)</div>
+        </div>
+      </div>
+    </aside>
+
+    <div>
+      <div class="col-head">
+        <span class="num">03</span>
+        <h2><em>Research</em> Experience</h2>
+      </div>
+
+      <div class="col-stack">
+        <div class="card" id="entry-ccn">
+          <div class="entry-head">
+            <a href="https://ccn.berkeley.edu/" target="_blank" rel="noopener">
+              <img class="entry-logo" src="https://www.google.com/s2/favicons?domain=ccn.berkeley.edu&sz=128" alt="CCN Lab">
+            </a>
+            <div class="entry-info">
+              <div class="entry-toprow">
+                <span class="entry-title"><a href="https://ccn.berkeley.edu/" target="_blank" rel="noopener">Computational Cognitive Neuroscience Lab</a> <span class="entry-place">&middot; UC Berkeley</span></span>
+                <span class="entry-date">May — Aug 2026</span>
+              </div>
+              <p class="entry-meta">Research Intern &middot; PI: <em>Anne Collins</em></p>
+            </div>
+          </div>
+          <div class="entry-body">
+            <p>Artificial neural networks for model identification and parameter estimation in computational cognitive models.</p>
+          </div>
+          <div class="tags">
+            <a class="tag" href="#skill-mlai">Neural Networks</a>
+            <a class="tag" href="#skill-mlai">Cognitive Modeling</a>
+            <a class="tag" href="#skill-stats">Parameter Estimation</a>
+            <a class="tag" href="#skill-programming">Python</a>
+          </div>
+        </div>
+
+        <div class="card" id="entry-neurolead">
+          <div class="entry-head">
+            <a href="https://neurolead.hku.hk" target="_blank" rel="noopener">
+              <img class="entry-logo" src="https://www.google.com/s2/favicons?domain=neurolead.hku.hk&sz=128" alt="NeuroLeaD Lab">
+            </a>
+            <div class="entry-info">
+              <div class="entry-toprow">
+                <span class="entry-title"><a href="https://neurolead.hku.hk" target="_blank" rel="noopener">NeuroLeaD Lab</a> <span class="entry-place">&middot; HKU</span></span>
+                <span class="entry-date">Jan 2025 — Present</span>
+              </div>
+              <p class="entry-meta">Research Intern &middot; PI: <em>Fan Cao</em></p>
+            </div>
+          </div>
+
+          <div class="proj" id="proj-asd">
+            <div class="proj-head">
+              <span class="proj-label">Project 01</span>
+              <span class="proj-title">Atypical Functional Network Trajectories in ASD</span>
+            </div>
+            <ul>
+              <li>Built and deployed large-scale neuroimaging workflows on HKU HPC; processed ABIDE-I/II and ADHD-200; authored an internal HPC operations manual</li>
+              <li>Curated data to BIDS; preprocessing with Micapipe; QC with MRIQC and motion filtering (FD-mean)</li>
+              <li>Resampled to fsaverage4 space; computed spatial similarity to a normative atlas (Sun et al., 2025; n ≈ 30,000)</li>
+              <li>Hybrid Python–MATLAB pipeline to estimate inter-subject variability of functional connectivity profiles</li>
+              <li>Preliminary finding: ASD shows higher similarity to norms in later adulthood (35–40y); validation on ABIDE-II planned</li>
+            </ul>
+            <div class="tags">
+              <a class="tag" href="#skill-programming">Python</a>
+              <a class="tag" href="#skill-programming">MATLAB</a>
+              <a class="tag" href="#skill-neuro">Micapipe</a>
+              <a class="tag" href="#skill-neuro">MRIQC</a>
+              <a class="tag" href="#skill-neuro">BIDS</a>
+              <a class="tag" href="#skill-computing">HPC</a>
+              <a class="tag" href="#skill-neuro">fMRI</a>
+            </div>
+          </div>
+
+          <div class="proj" id="proj-language">
+            <div class="proj-head">
+              <span class="proj-label">Project 02</span>
+              <span class="proj-title">Longitudinal Neural Specialization in Language Development</span>
+            </div>
+            <ul>
+              <li>Preprocessed longitudinal pediatric fMRI (OpenNeuro ds003604; ages 5 / 7 / 9) with SPM12 + ArtRepair</li>
+              <li>Built first-level GLMs to dissociate semantic vs. phonological processing</li>
+              <li>Testing the Interactive Specialization framework; evaluating early predictors at age 5</li>
+            </ul>
+            <div class="tags">
+              <a class="tag" href="#skill-neuro">SPM12</a>
+              <a class="tag" href="#skill-stats">GLM</a>
+              <a class="tag" href="#skill-neuro">fMRI</a>
+              <a class="tag" href="#skill-stats">Longitudinal Analysis</a>
+              <a class="tag" href="#skill-neuro">ArtRepair</a>
+            </div>
+          </div>
+
+          <div class="proj" id="proj-reading">
+            <div class="proj-head">
+              <span class="proj-label">Project 03</span>
+              <span class="proj-title">Phonological Intervention in Chinese Reading Disability</span>
+            </div>
+            <ul>
+              <li>Administered standardized assessments for 35+ participants; supported 20-hour intervention delivery and fMRI session coordination</li>
+              <li>Evaluated intervention effects with 2×2 ANOVA (Jamovi); ran SPM12 preprocessing and first-level GLMs</li>
+            </ul>
+            <div class="tags">
+              <a class="tag" href="#skill-neuro">SPM12</a>
+              <a class="tag" href="#skill-stats">ANOVA</a>
+              <a class="tag" href="#skill-tools">Jamovi</a>
+              <a class="tag" href="#skill-stats">Standardized Assessments</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔════ Spread 03 — Work + Leadership (left half) | Products (right half) ════╗ -->
+<section class="spread" id="sec-products">
+  <div class="spread-grid split-1-1">
+    <div>
+      <div class="col-head">
+        <span class="num">04</span>
+        <h2><em>Work</em> Experience</h2>
+      </div>
+      <div class="col-stack">
+        <div class="card" id="entry-welldify-work">
+          <div class="entry-head">
+            <a href="https://www.welldify.io/" target="_blank" rel="noopener">
+              <img class="entry-logo" src="https://www.google.com/s2/favicons?domain=welldify.io&sz=128" alt="Welldify">
+            </a>
+            <div class="entry-info">
+              <div class="entry-toprow">
+                <span class="entry-title"><a href="https://www.welldify.io/" target="_blank" rel="noopener">Welldify</a> <span class="entry-place">&middot; Hong Kong</span></span>
+                <span class="entry-date">Mar — Jul 2025</span>
+              </div>
+              <p class="entry-meta">Psychology Research Intern &middot; supervised by <em>OnTing Lo</em> (Lingnan University)</p>
+            </div>
+          </div>
+          <div class="entry-body">
+            <ul>
+              <li>Supported LLM training monitoring for wellbeing indices across 66,000 labeled sentences</li>
+              <li>Researched wellbeing frameworks (PERMA, DASS) to refine index methodology</li>
+              <li>Built a semi-automated content pipeline (Poe + DeepSeek + generative imagery) that produced 30+ educational carousel sets</li>
+            </ul>
+          </div>
+          <div class="tags">
+            <a class="tag" href="#skill-mlai">LLM Evaluation</a>
+            <a class="tag" href="#skill-mlai">PERMA</a>
+            <a class="tag" href="#skill-mlai">DASS</a>
+            <a class="tag" href="#skill-tools">Content Pipelines</a>
+            <a class="tag" href="#skill-mlai">DeepSeek</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-head" style="margin-top: 36px;">
+        <span class="num">05</span>
+        <h2><em>Leadership</em></h2>
+        <div class="sub">Cross-functional event curation at scale</div>
+      </div>
+      <div class="col-stack">
+        <div class="lead-card">
+          <img class="lead-logo" src="https://www.google.com/s2/favicons?domain=cssaud.com&sz=128" alt="HKU CSSAUD">
+          <div class="lead-body">
+            <div class="lead-toprow">
+              <div class="lead-title"><a href="https://mp.weixin.qq.com/s/eBYcko5nsMW2Jt4KW3URLg?scene=126&amp;clicktime=1778353490&amp;enterid=1778353490" target="_blank" rel="noopener">HKU CSSAUD</a></div>
+              <div class="lead-meta">Oct 2023 — Oct 2024</div>
+            </div>
+            <div class="lead-role">Cultural &amp; Recreation Secretary</div>
+            <p>Led a cross-functional team of <strong>~30 members</strong> across art, promotion, video, stage, tech, and external relations to deliver the annual <em>CSSA Singing Contest</em> &mdash; a campus-scale showcase that drew <strong>300+ live audience</strong> and required end-to-end curation from concept to production night.</p>
+            <p>Coordinated rehearsal schedules, sponsor outreach, branding, and live-show direction; built repeatable run-of-show documentation that the next-year team inherited.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="col-head">
+        <span class="num">06</span>
+        <h2><em>Products</em></h2>
+      </div>
+      <div class="col-stack">
+        <div class="card" id="entry-vstandby">
+          <div class="product-head">
+            <a href="https://cofun.harrycn.com/#product" target="_blank" rel="noopener" aria-label="VStandby Studio (product page)">
+              <img class="product-logo" src="https://www.google.com/s2/favicons?domain=cofun.harrycn.com&sz=128" alt="VStandby">
+            </a>
+            <a class="product-name" href="https://cofun.harrycn.com/#product" target="_blank" rel="noopener">VStandby <em>Studio</em></a>
+            <div class="product-icons">
+              <a class="icon-btn" href="https://github.com/srbisupermeni/4-26hack/tree/mode-system" target="_blank" rel="noopener" title="GitHub repo">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.5-1.4-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+              </a>
+              <a class="icon-btn primary" href="https://cofun.harrycn.com/#product" target="_blank" rel="noopener" title="Live demo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+          <p class="product-meta">A real-time AI digital human that watches livestreams alongside you &middot; BETA AI Hackathon &middot; Apr 2026</p>
+          <div class="product-body">
+            <p>VStandby Studio is a companion AI for livestream viewers. It detects high-motion highlights with computer vision, threads recent caption context to an LLM, and delivers spoken commentary &mdash; with selectable persona modes so different channels feel distinct.</p>
+            <ul>
+              <li>WebSocket pipeline streams highlights to the LLM with configurable playback delay (<code>deliverAfterMs</code>)</li>
+              <li>OpenCV motion detection (<code style="background-color: rgb(244, 244, 244)">highlight_detect.py</code>) identifies in-stream peak moments</li>
+              <li>Persona-aware prompting renders distinct speaking styles per channel</li>
+            </ul>
+          </div>
+          <div class="tags">
+            <a class="tag" href="#skill-programming">Python</a>
+            <a class="tag" href="#skill-mlai">OpenCV</a>
+            <a class="tag" href="#skill-programming">WebSockets</a>
+            <a class="tag" href="#skill-mlai">LLM API</a>
+            <a class="tag" href="#skill-computing">Real-time Systems</a>
+          </div>
+        </div>
+
+        <div class="card" id="entry-welldify">
+          <div class="product-head">
+            <img class="product-logo" src="https://www.google.com/s2/favicons?domain=welldify.io&sz=128" alt="Welldify">
+            <span class="product-name">Welldify <em>AI Wellbeing Coach</em></span>
+            <div class="product-icons">
+              <a class="icon-btn primary" href="https://www.welldify.io/" target="_blank" rel="noopener" title="welldify.io">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+          <p class="product-meta">Diary-based LLM for personalized mental wellness &middot; <em>contributed during internship, 2025</em></p>
+          <div class="product-body">
+            <p>Welldify is a Hong Kong–based AI wellness platform &mdash; a diary-driven LLM coach delivering personalized recommendations grounded in evidence-based positive psychology (PERMA, DASS). Users journal regularly; the model surfaces patterns and prompts trackable progress on individual wellness goals.</p>
+            <p>I contributed on the model side &mdash; supporting LLM training monitoring across 66,000 labeled sentences for wellbeing-index calibration, and helping refine the framework that backs how the system reads emotional state.</p>
+          </div>
+          <div class="tags">
+            <a class="tag" href="#skill-mlai">LLM</a>
+            <a class="tag" href="#skill-mlai">Diary AI</a>
+            <a class="tag" href="#skill-mlai">Mental Health</a>
+            <a class="tag" href="#skill-mlai">PERMA</a>
+            <a class="tag" href="#skill-mlai">Positive Psychology</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="spread" id="contact">
+  <div class="col-head" style="max-width: 600px;">
+    <span class="num">07</span>
+    <h2><em>Contact</em></h2>
+  </div>
+  <div class="card" style="max-width: 600px; font-family: var(--font-serif); font-size: 16px; line-height: 1.75;">
+    <p>Best reached by email at <a href="mailto:nathancheng685@gmail.com">nathancheng685@gmail.com</a>. I'm in Berkeley, CA through August 2026, then back in Hong Kong.</p>
+    <p style="margin-top: 8px;">Also on <a href="https://www.linkedin.com/in/nathancheng685" target="_blank" rel="noopener">LinkedIn</a>.</p>
+  </div>
+</section>
+
+<footer>
+  <span>Nathan Cheng &middot; Berkeley + HK · 2026</span>
+  <span>built with care</span>
+</footer>
+
+</div>
+
+<script>
+(function () {
+  function highlightTarget(hash) {
+    if (!hash) return;
+    var el = document.querySelector(hash);
+    if (!el) return;
+    el.classList.remove('is-target');
+    void el.offsetWidth;
+    el.classList.add('is-target');
+    setTimeout(function () { el.classList.remove('is-target'); }, 1500);
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var hash = a.getAttribute('href');
+    if (hash.length < 2) return;
+    setTimeout(function () { highlightTarget(hash); }, 350);
+  });
+  if (location.hash) setTimeout(function () { highlightTarget(location.hash); }, 400);
+})();
+</script>
+
+</body>
+</html>
