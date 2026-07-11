@@ -65,19 +65,23 @@
     const sec = document.getElementById(id);
     if (sec) map.set(sec, a);
   });
-  if (map.size && "IntersectionObserver" in window) {
-    const io2 = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            links.forEach((l) => l.classList.remove("active"));
-            const a = map.get(e.target);
-            if (a) a.classList.add("active");
-          }
-        });
-      },
-      { threshold: 0.4, rootMargin: "-20% 0px -55% 0px" }
-    );
-    map.forEach((_a, sec) => io2.observe(sec));
+  if (map.size) {
+    const updateActiveLink = () => {
+      const probe = window.innerHeight * 0.32;
+      let current = null;
+      map.forEach((link, section) => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= probe && rect.bottom > probe) current = link;
+      });
+      if (!current && window.location.hash) {
+        current = links.find((link) => link.getAttribute("href") === window.location.hash) || null;
+      }
+      if (!current) return;
+      links.forEach((link) => link.classList.remove("active"));
+      current.classList.add("active");
+    };
+    window.addEventListener("scroll", updateActiveLink, { passive: true });
+    window.addEventListener("resize", updateActiveLink);
+    requestAnimationFrame(updateActiveLink);
   }
 })();

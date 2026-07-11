@@ -3690,6 +3690,169 @@
   .project:hover .tags .tag { border-color: color-mix(in oklab, var(--accent-2) 32%, var(--rule)); }
   .tags .tag::before { content: ""; display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: var(--accent-2); margin-right: 7px; vertical-align: middle; }
 
+  /* ─────────── Featured AI product work ─────────── */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .feature-card {
+    --project-accent: var(--accent);
+    position: relative;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid color-mix(in oklab, var(--project-accent) 30%, var(--rule));
+    border-radius: 6px;
+    background: color-mix(in oklab, var(--bg) 82%, var(--project-accent) 5%);
+    box-shadow: 0 26px 70px -48px color-mix(in oklab, var(--project-accent) 60%, transparent);
+    transition: transform .35s cubic-bezier(.2,.7,.3,1), border-color .35s, box-shadow .35s;
+  }
+  .feature-card::before {
+    content: "";
+    position: absolute;
+    z-index: 4;
+    inset: 0 auto 0 0;
+    width: 3px;
+    background: var(--project-accent);
+    box-shadow: 0 0 20px color-mix(in oklab, var(--project-accent) 70%, transparent);
+  }
+  .feature-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in oklab, var(--project-accent) 58%, var(--rule));
+    box-shadow: 0 34px 90px -46px color-mix(in oklab, var(--project-accent) 65%, transparent);
+  }
+  .feature-card--lead {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.52fr) minmax(300px, .78fr);
+    min-height: 470px;
+  }
+  .feature-media {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    background: #050a0f;
+    border-bottom: 1px solid color-mix(in oklab, var(--project-accent) 18%, var(--rule));
+  }
+  .feature-card--lead .feature-media { border-right: 1px solid color-mix(in oklab, var(--project-accent) 18%, var(--rule)); border-bottom: 0; }
+  .feature-window {
+    height: 100%;
+    min-height: 260px;
+    display: grid;
+    grid-template-rows: 34px 1fr;
+    background: #0a1016;
+  }
+  .feature-window-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 14px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+    background: rgba(3,8,12,.92);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: rgba(238,244,240,.48);
+  }
+  .feature-window-dots { display: flex; gap: 5px; }
+  .feature-window-dots i { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.18); }
+  .feature-window-dots i:first-child { background: var(--project-accent); box-shadow: 0 0 9px color-mix(in oklab, var(--project-accent) 60%, transparent); }
+  .feature-window img {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: saturate(.88) contrast(1.02);
+    transition: transform .65s cubic-bezier(.2,.7,.3,1), filter .4s;
+  }
+  .feature-card:hover .feature-window img { transform: scale(1.018); filter: saturate(1) contrast(1.03); }
+  .feature-copy {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 30px 30px 28px;
+  }
+  .feature-card--lead .feature-copy { padding: 38px 36px 34px; }
+  .feature-kicker {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 28px;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--faint-solid);
+  }
+  .feature-kicker .feature-no { color: var(--project-accent); }
+  .feature-title {
+    font-family: var(--font-display);
+    font-size: clamp(30px, 3.2vw, 46px);
+    font-style: var(--display-style);
+    font-weight: 400;
+    line-height: 1;
+    color: var(--ink);
+    margin-bottom: 18px;
+    letter-spacing: -0.01em;
+  }
+  .feature-card:not(.feature-card--lead) .feature-title { font-size: clamp(28px, 3vw, 38px); }
+  .feature-title a { color: inherit; text-decoration: none; }
+  .feature-summary {
+    max-width: 46ch;
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--soft);
+  }
+  .feature-summary em { color: var(--ink); font-style: italic; }
+  .feature-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    margin-top: auto;
+    padding-top: 28px;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--faint-solid);
+  }
+  .feature-proof span { display: inline-flex; align-items: center; gap: 7px; }
+  .feature-proof span::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--project-accent); }
+  .feature-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 24px;
+    width: fit-content;
+    color: var(--ink);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+  }
+  .feature-link .arrow { color: var(--project-accent); transition: transform .25s; }
+  .feature-link:hover .arrow { transform: translate(3px, -3px); }
+  .feature-secondary {
+    margin-top: 18px;
+    padding: 18px 22px 18px 26px;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    gap: 20px;
+    align-items: center;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    color: var(--soft);
+  }
+  .feature-secondary .mark { color: #d6c75a; font-family: var(--font-mono); font-size: 11px; }
+  .feature-secondary strong { color: var(--ink); font-weight: 500; }
+  .feature-secondary p { font-size: 14.5px; line-height: 1.5; }
+  .feature-secondary a { color: var(--accent); text-decoration: none; font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+
   /* ─────────── Thoughts ─────────── */
   .thoughts { display: grid; grid-template-columns: 1fr; gap: 0; }
   .thought {
@@ -4102,6 +4265,10 @@
     .project::before { display: none; }
     .thought .tnum b { font-size: 44px; }
     .project .meta .year { font-size: 26px; }
+    .feature-card--lead { grid-template-columns: 1fr; min-height: 0; }
+    .feature-card--lead .feature-media { border-right: 0; border-bottom: 1px solid color-mix(in oklab, var(--project-accent) 18%, var(--rule)); }
+    .feature-card--lead .feature-window { aspect-ratio: 16 / 9; }
+    .feature-card--lead .feature-copy { padding: 30px; }
     .elsewhere { grid-template-columns: 1fr; }
     .ext:nth-child(odd) { border-right: none; padding-right: 0; }
     .ext:nth-child(even) { padding-left: 0; }
@@ -4114,6 +4281,15 @@
   }
   @media (max-width: 560px) {
     .hero .name { font-size: clamp(34px, 13.2vw, 64px); }
+    .feature-grid { grid-template-columns: 1fr; gap: 14px; }
+    .feature-card--lead { grid-column: auto; }
+    .feature-window { min-height: 0; aspect-ratio: 16 / 10; grid-template-rows: 30px 1fr; }
+    .feature-card--lead .feature-window { aspect-ratio: 16 / 10; }
+    .feature-copy, .feature-card--lead .feature-copy { padding: 24px 22px 22px; }
+    .feature-kicker { margin-bottom: 20px; }
+    .feature-summary { font-size: 14.5px; }
+    .feature-secondary { grid-template-columns: auto 1fr; gap: 10px 14px; }
+    .feature-secondary a { grid-column: 2; }
   }
 </style>
 </head>
@@ -4128,9 +4304,8 @@
 <div class="topbar">
   <nav>
     <a href="#now" data-spy="">Now</a>
-    <a href="#industry" data-spy="">Industry</a>
+    <a href="#product-work" data-spy="">Product</a>
     <a href="#research" data-spy="">Research</a>
-    <a href="#building" data-spy="">Building</a>
     <a href="#thinking" data-spy="">Thinking</a>
     <a href="#contact" data-spy="">Contact</a>
   </nav>
@@ -4145,15 +4320,6 @@
       <span class="name"><span data-decode="Nathan Cheng">Nathan Cheng</span></span>
       <span class="name-zh">程一</span>
     </h1>
-    <p class="lede">
-      Building AI products and researching <em>how the mind computes</em> — somewhere between a model checkpoint and a piano.
-    </p>
-    <div class="hero-tags">
-      <span class="chip">AI</span>
-      <span class="chip">Computational Cognition</span>
-      <span class="chip">Product</span>
-      <span class="chip">Neuroscience</span>
-    </div>
     <div class="scroll-hint"><span class="line"></span>Scroll</div>
   </section>
 
@@ -4182,34 +4348,68 @@
     </div>
   </section>
 
-  <!-- ─────────── 02 · Industry experience ─────────── -->
-  <section id="industry" data-reveal="">
+  <!-- ─────────── 02 · Selected AI product work ─────────── -->
+  <section id="product-work" data-reveal="">
     <div class="chapter">
       <div class="idx"><span class="num">§ 02</span><span class="bar"></span></div>
-      <h2 class="title">Industry experience</h2>
+      <h2 class="title">Selected AI product work</h2>
       <div class="ornament">
         <svg viewBox="0 0 46 28" fill="none" stroke="currentColor" stroke-width="1.4">
           <rect x="8" y="9" width="30" height="14" rx="2"></rect><line x1="18" y1="9" x2="18" y2="5"></line><line x1="28" y1="9" x2="28" y2="5"></line>
         </svg>
       </div>
     </div>
-    <div class="projects">
-      <article class="project">
-        <div class="meta"><span class="year">'26</span>Berkeley<br>SkyDeck</div>
-        <div class="project-body">
-          <a href="https://pivotbridge.ai/" class="project-title" target="_blank" rel="noopener">PivotBridge.AI <span class="out">↗</span></a>
-          <p class="project-desc">Product (UX/UI) intern on an early-stage AI career-agent platform at Berkeley SkyDeck (Jun-Jul 2026). Conducted product testing, competitor research, UI/UX feedback, and localization / UI-copy QA during the pre-launch and launch period; evaluated onboarding flows and <em>AI-output presentation</em> across resume optimization, interview simulation, offer decision, and career decision features, producing reports with screenshots, severity levels, and implementation suggestions that informed shipped product improvements.</p>
-          <div class="tags"><span class="tag">ux-ui</span><span class="tag">ai-product</span><span class="tag">onboarding</span><span class="tag">berkeley-skydeck</span></div>
+    <div class="feature-grid">
+      <article class="feature-card feature-card--lead" style="--project-accent:#26b5a7">
+        <a class="feature-media" href="https://pivotbridge.ai/" target="_blank" rel="noopener" aria-label="Open PivotBridge.AI">
+          <div class="feature-window">
+            <div class="feature-window-bar"><span class="feature-window-dots"><i></i><i></i><i></i></span><span>Live product · Public view</span></div>
+            <img src="assets/preview-pivotbridge.jpg" alt="PivotBridge AI career agent interface" loading="lazy">
+          </div>
+        </a>
+        <div class="feature-copy">
+          <div class="feature-kicker"><span class="feature-no">Selected 01</span><span>Berkeley SkyDeck · 2026</span></div>
+          <h3 class="feature-title"><a href="https://pivotbridge.ai/" target="_blank" rel="noopener">PivotBridge.AI</a></h3>
+          <p class="feature-summary">Evaluated a live AI career agent across onboarding, interview, resume and decision workflows — turning <em>trust gaps and UX friction</em> into implementation-ready product recommendations.</p>
+          <div class="feature-proof"><span>Product evaluation</span><span>AI output quality</span><span>Shipped improvements</span></div>
+          <a class="feature-link" href="https://pivotbridge.ai/" target="_blank" rel="noopener">Visit product <span class="arrow">↗</span></a>
         </div>
       </article>
-      <article class="project">
-        <div class="meta"><span class="year">'25</span>Research<br>Intern</div>
-        <div class="project-body">
-          <a href="https://www.welldify.io/" class="project-title" target="_blank" rel="noopener">Welldify <span class="out">↗</span></a>
-          <p class="project-desc">Evaluated an LLM trained on 66,000 labeled sentences for journal-based wellbeing scoring; benchmarked outputs against PERMA and DASS to find <em>methodology gaps</em>. Built a content pipeline that shipped 30+ psychoeducation carousels.</p>
-          <div class="tags"><span class="tag">llm-eval</span><span class="tag">perma</span><span class="tag">dass</span><span class="tag">content-ops</span></div>
+      <article class="feature-card" style="--project-accent:#8f5cff">
+        <a class="feature-media" href="https://cofun.harrycn.com/#product" target="_blank" rel="noopener" aria-label="Open VStandby Studio">
+          <div class="feature-window">
+            <div class="feature-window-bar"><span class="feature-window-dots"><i></i><i></i><i></i></span><span>24-hour build</span></div>
+            <img src="assets/preview-vstandby.jpg" alt="VStandby livestream companion interface" loading="lazy">
+          </div>
+        </a>
+        <div class="feature-copy">
+          <div class="feature-kicker"><span class="feature-no">Selected 02</span><span>BETA AI · 2026</span></div>
+          <h3 class="feature-title"><a href="https://cofun.harrycn.com/#product" target="_blank" rel="noopener">VStandby Studio</a></h3>
+          <p class="feature-summary">A real-time AI companion that detects livestream highlights, follows caption context and reacts through a selectable persona.</p>
+          <div class="feature-proof"><span>Real-time pipeline</span><span>LLM + vision</span></div>
+          <a class="feature-link" href="https://cofun.harrycn.com/#product" target="_blank" rel="noopener">Open demo <span class="arrow">↗</span></a>
         </div>
       </article>
+      <article class="feature-card" style="--project-accent:#e49b8f">
+        <a class="feature-media" href="https://eao.nathanchengyi.com/" target="_blank" rel="noopener" aria-label="Open Everyone At Once">
+          <div class="feature-window">
+            <div class="feature-window-bar"><span class="feature-window-dots"><i></i><i></i><i></i></span><span>Independent · Live</span></div>
+            <img src="assets/preview-everyone-at-once.jpg" alt="Everyone At Once character matching product" loading="lazy">
+          </div>
+        </a>
+        <div class="feature-copy">
+          <div class="feature-kicker"><span class="feature-no">Selected 03</span><span>0→1 product · 2026</span></div>
+          <h3 class="feature-title"><a href="https://eao.nathanchengyi.com/" target="_blank" rel="noopener">Everyone At Once</a></h3>
+          <p class="feature-summary">Twelve situational questions become a mix of fictional characters through LLM simulation and Bayesian inference.</p>
+          <div class="feature-proof"><span>Public launch</span><span>~12ms inference</span></div>
+          <a class="feature-link" href="https://eao.nathanchengyi.com/" target="_blank" rel="noopener">Try it live <span class="arrow">↗</span></a>
+        </div>
+      </article>
+    </div>
+    <div class="feature-secondary">
+      <span class="mark">◆</span>
+      <p><strong>Welldify</strong> · Supported LLM monitoring across 66,000 labeled sentences and built a semi-automated workflow that shipped 30+ psychoeducation carousel sets.</p>
+      <a href="https://www.welldify.io/" target="_blank" rel="noopener">View work ↗</a>
     </div>
   </section>
 
@@ -4244,46 +4444,10 @@
     </div>
   </section>
 
-  <!-- ─────────── 04 · Building (connected blocks) ─────────── -->
-  <section id="building" data-reveal="">
-    <div class="chapter">
-      <div class="idx"><span class="num">§ 04</span><span class="bar"></span></div>
-      <h2 class="title">Building</h2>
-      <div class="ornament">
-        <svg viewBox="0 0 46 28" fill="none" stroke="currentColor" stroke-width="1.4">
-          <line x1="6" y1="8" x2="40" y2="8"></line><line x1="6" y1="14" x2="34" y2="14"></line><line x1="6" y1="20" x2="28" y2="20"></line>
-        </svg>
-      </div>
-    </div>
-    <div class="netgroup" data-net="">
-      <svg class="net-links" aria-hidden="true"></svg>
-      <div class="netrow">
-        <article class="netblock">
-          <div class="entry-eyebrow"><span class="yr">'26</span><span>Product · Research</span></div>
-          <a href="https://web-production-139ec.up.railway.app/" class="entry-title" target="_blank" rel="noopener">EveryoneAtOnce <span class="out">↗</span></a>
-          <p class="entry-desc">Pick a fictional world you love — anime (<em>Jujutsu Kaisen</em>), TV (<em>Friends</em>) — and find out <em>who you would be in it</em>. We use public lore to build an LLM <em>response surface</em> over a world's characters, then infer your mix from your answers.</p>
-          <div class="tags"><span class="tag">llm-simulation</span><span class="tag">inference</span><span class="tag">fastapi</span></div>
-        </article>
-        <article class="netblock">
-          <div class="entry-eyebrow"><span class="yr">'26</span><span>BETA AI · Hackathon</span></div>
-          <a href="https://cofun.harrycn.com/#product" class="entry-title" target="_blank" rel="noopener">VStandby Studio <span class="out">↗</span></a>
-          <p class="entry-desc">A real-time AI companion that watches livestreams alongside you. Computer vision picks the highlights, an LLM commentates with context, and selectable personas keep channels distinct — built to solve the <em>dead-air problem</em>.</p>
-          <div class="tags"><span class="tag">computer-vision</span><span class="tag">llm</span><span class="tag">real-time</span></div>
-        </article>
-        <article class="netblock">
-          <div class="entry-eyebrow"><span class="yr">'26</span><span>Product · Collaboration</span></div>
-          <a href="https://github.com/iccontre/mylit.net" class="entry-title" target="_blank" rel="noopener">mylit.net <span class="out">↗</span></a>
-          <p class="entry-desc">Sleep &amp; productivity app (React Native + Expo). Offline-first goal setting and a Progress-mode quest board, shipped with a build-time LLM data pipeline. With <a href="https://github.com/iccontre" class="inline" target="_blank" rel="noopener">Isaac</a>.</p>
-          <div class="tags"><span class="tag">react-native</span><span class="tag">expo</span><span class="tag">offline-first</span></div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─────────── 05 · Thinking about (connected blocks) ─────────── -->
+  <!-- ─────────── 04 · Thinking about (connected blocks) ─────────── -->
   <section id="thinking" data-reveal="">
     <div class="chapter">
-      <div class="idx"><span class="num">§ 05</span><span class="bar"></span></div>
+      <div class="idx"><span class="num">§ 04</span><span class="bar"></span></div>
       <h2 class="title">Thinking about</h2>
       <div class="ornament">
         <svg viewBox="0 0 46 28" fill="currentColor">
@@ -4316,7 +4480,7 @@
   <!-- ─────────── 05. Elsewhere ─────────── -->
   <section data-reveal="">
     <div class="chapter">
-      <div class="idx"><span class="num">§ 06</span><span class="bar"></span></div>
+      <div class="idx"><span class="num">§ 05</span><span class="bar"></span></div>
       <h2 class="title">Elsewhere</h2>
       <div class="ornament">
         <svg viewBox="0 0 46 28" fill="none" stroke="currentColor" stroke-width="1.4">
@@ -4335,11 +4499,11 @@
         <span class="ext-arrow">↗</span>
       </a>
       <a href="https://xhslink.com/m/3bd91aRAAlt" class="ext" target="_blank" rel="noopener">
-        <div class="ext-left"><span class="ext-name">Xiaohongshu</span><span class="ext-note">Music album reviews, personal notes</span></div>
+        <div class="ext-left"><span class="ext-name">Xiaohongshu</span><span class="ext-note">AI software reviews</span></div>
         <span class="ext-arrow">↗</span>
       </a>
-      <a href="https://space.bilibili.com/302256709" class="ext" target="_blank" rel="noopener">
-        <div class="ext-left"><span class="ext-name">Bilibili</span><span class="ext-note">Singing, piano, guitar, footage from the Beijing stray-animal shelter I volunteered at through high school</span></div>
+      <a href="https://x.com/nathancheng685" class="ext" target="_blank" rel="noopener">
+        <div class="ext-left"><span class="ext-name">X</span><span class="ext-note">AI products, building in public, and brief field notes</span></div>
         <span class="ext-arrow">↗</span>
       </a>
     </div>
@@ -4348,7 +4512,7 @@
   <!-- ─────────── 06. Listening ─────────── -->
   <section data-reveal="">
     <div class="chapter">
-      <div class="idx"><span class="num">§ 07</span><span class="bar"></span></div>
+      <div class="idx"><span class="num">§ 06</span><span class="bar"></span></div>
       <h2 class="title">Listening to</h2>
       <div class="ornament">
         <svg viewBox="0 0 46 28" fill="none" stroke="currentColor" stroke-width="1.4">
@@ -4371,7 +4535,7 @@
   <!-- ─────────── 07. Contact ─────────── -->
   <section id="contact" data-reveal="">
     <div class="chapter">
-      <div class="idx"><span class="num">§ 08</span><span class="bar"></span></div>
+      <div class="idx"><span class="num">§ 07</span><span class="bar"></span></div>
       <h2 class="title">Say hi</h2>
       <div class="ornament">
         <svg viewBox="0 0 46 28" fill="none" stroke="currentColor" stroke-width="1.4">
