@@ -1,0 +1,59 @@
+name: Deploy website
+
+on:
+  workflow_dispatch:
+    inputs:
+      site:
+        description: "Use portfolio for the main site, or enter a sites/<slug> directory name"
+        required: true
+        default: portfolio
+        type: string
+
+concurrency:
+  group: production-website
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    name: Deploy ${{ inputs.site }}
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+      - name: Check out selected commit
+        uses: actions/checkout@v4
+
+      - name: Configure SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 "$RUNNER_TEMP/ssh"
+          printf '%s\n' "$DEPLOY_SSH_KEY" > "$RUNNER_TEMP/ssh/deploy_key"
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > "$RUNNER_TEMP/ssh/known_hosts"
+          chmod 600 "$RUNNER_TEMP/ssh/deploy_key"
+          chmod 644 "$RUNNER_TEMP/ssh/known_hosts"
+
+      - name: Validate and deploy
+        env:
+          SITE_INPUT: ${{ inputs.site }}
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_SSH_KEY_FILE: ${{ runner.temp }}/ssh/deploy_key
+          DEPLOY_KNOWN_HOSTS_FILE: ${{ runner.temp }}/ssh/known_hosts
+        run: ./scripts/deploy-site.sh "$SITE_INPUT"
+
+      - name: Record deployment
+        env:
+          SITE_INPUT: ${{ inputs.site }}
+          DEPLOYED_SHA: ${{ github.sha }}
+        run: |
+          {
+            echo "### Website deployment"
+            echo
+            printf -- '- Site: `%s`\n' "$SITE_INPUT"
+            printf -- '- Commit: `%s`\n' "$DEPLOYED_SHA"
+          } >> "$GITHUB_STEP_SUMMARY"
