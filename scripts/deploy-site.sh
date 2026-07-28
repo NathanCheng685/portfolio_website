@@ -121,4 +121,3 @@ sudo systemctl reload nginx
 REMOTE_SCRIPT
 
 echo "Deployed $public_url"
-

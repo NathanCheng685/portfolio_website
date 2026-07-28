@@ -109,4 +109,3 @@ To roll back content, the preferred path is:
 Server backups are an emergency recovery layer, not the normal source of
 truth. They are not automatically pruned; periodically review disk usage and
 remove old backups deliberately.
-
