@@ -3859,6 +3859,7 @@
   .feature-secondary strong { color: var(--ink); font-weight: 500; }
   .feature-secondary p { font-size: 14.5px; line-height: 1.5; }
   .feature-secondary a { color: var(--accent); text-decoration: none; font-family: var(--font-mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+  .feature-secondary + .feature-secondary { margin-top: 0; border-top: 0; }
 
   /* ─────────── Thoughts ─────────── */
   .thoughts { display: grid; grid-template-columns: 1fr; gap: 0; }
@@ -4346,7 +4347,7 @@
     </div>
     <div class="now-grid">
       <p class="currently">
-        In Berkeley, California. Exploring AI products, and researching neural-network-based parameter estimation in <a href="https://ccn.studentorg.berkeley.edu/" class="inline" target="_blank" rel="noopener">Anne Collins' lab</a>.
+        Final year of my Bachelor of Psychology at HKU. Co-founder at <a href="https://smartcited.com" class="inline" target="_blank" rel="noopener">SmartCited</a>, and working with <a href="https://ccn.studentorg.berkeley.edu/" class="inline" target="_blank" rel="noopener">Anne Collins' lab</a> at UC Berkeley on neural-network parameter estimation and model identification.
       </p>
       <figure class="portrait-node">
         <img src="assets/91bf3377-bd00-4d05-927f-bf22ac71142e.webp" alt="Nathan Cheng">
@@ -4367,18 +4368,18 @@
       </div>
     </div>
     <div class="feature-grid">
-      <article class="feature-card" style="--project-accent:#198f3b">
+      <article class="feature-card feature-card--lead" style="--project-accent:#198f3b">
         <a class="feature-media" href="https://smartcited.com" target="_blank" rel="noopener" aria-label="Open SmartCited">
           <div class="feature-window">
-            <div class="feature-window-bar"><span class="feature-window-dots"><i></i><i></i><i></i></span><span>AI visibility actions · OpenAI Build Week</span></div>
+            <div class="feature-window-bar"><span class="feature-window-dots"><i></i><i></i><i></i></span><span>AI visibility actions · Smart Cited Inc.</span></div>
             <img src="assets/preview-cited.png" alt="SmartCited AI-search citation intelligence interface" loading="lazy">
           </div>
         </a>
         <div class="feature-copy">
-          <div class="feature-kicker"><span class="feature-no">Selected 01</span><span>OpenAI Build Week · 2026</span></div>
+          <div class="feature-kicker"><span class="feature-no">Selected 01</span><span>Co-founder · 2026</span></div>
           <h3 class="feature-title"><a href="https://smartcited.com" target="_blank" rel="noopener">SmartCited</a></h3>
-          <p class="feature-summary">Built an AI-visibility action system for local businesses: it asks <em>10 leakage-checked discovery questions</em> through OpenAI and Gemini, preserves the citation evidence, then prepares customer-authorized website, Yelp and directory actions.</p>
-          <div class="feature-proof"><span>10 unbranded questions</span><span>OpenAI + Gemini</span><span>Authorized actions</span></div>
+          <p class="feature-summary">Co-founded an AI-visibility action system for local businesses: it asks <em>10 leakage-checked discovery questions</em> through OpenAI and Gemini, preserves the citation evidence, then prepares customer-authorized website, Yelp and directory actions. Started at OpenAI Build Week, incorporated as Smart Cited Inc. in August 2026.</p>
+          <div class="feature-proof"><span>630-answer benchmark</span><span>OpenAI + Gemini</span><span>Authorized actions</span></div>
           <div class="feature-links">
             <a class="feature-link" href="https://smartcited.com/#/scan/sample" target="_blank" rel="noopener">Try the demo <span class="arrow">↗</span></a>
             <a class="feature-link" href="https://devpost.com/software/smartcited" target="_blank" rel="noopener">View submission <span class="arrow">↗</span></a>
@@ -4401,41 +4402,31 @@
           <a class="feature-link" href="https://pivotbridge.ai/" target="_blank" rel="noopener">Visit product <span class="arrow">↗</span></a>
         </div>
       </article>
-      <article class="feature-card" style="--project-accent:#8f5cff">
-        <a class="feature-media" href="https://cofun.harrycn.com/#product" target="_blank" rel="noopener" aria-label="Open VStandby Studio">
+      <article class="feature-card" style="--project-accent:#3f8f6e">
+        <a class="feature-media" href="https://www.welldify.io/" target="_blank" rel="noopener" aria-label="Open Welldify">
           <div class="feature-window">
-            <div class="feature-window-bar"><span class="feature-window-dots"><i></i><i></i><i></i></span><span>24-hour build</span></div>
-            <img src="assets/preview-vstandby.jpg" alt="VStandby livestream companion interface" loading="lazy">
+            <div class="feature-window-bar"><span class="feature-window-dots"><i></i><i></i><i></i></span><span>Wellbeing AI · Psychology research</span></div>
+            <img src="assets/preview-welldify.jpg" alt="Welldify wellbeing platform homepage" loading="lazy">
           </div>
         </a>
         <div class="feature-copy">
-          <div class="feature-kicker"><span class="feature-no">Selected 03</span><span>BETA AI · 2026</span></div>
-          <h3 class="feature-title"><a href="https://cofun.harrycn.com/#product" target="_blank" rel="noopener">VStandby Studio</a></h3>
-          <p class="feature-summary">A real-time AI companion that detects livestream highlights, follows caption context and reacts through a selectable persona.</p>
-          <div class="feature-proof"><span>Real-time pipeline</span><span>LLM + vision</span></div>
-          <a class="feature-link" href="https://cofun.harrycn.com/#product" target="_blank" rel="noopener">Open demo <span class="arrow">↗</span></a>
-        </div>
-      </article>
-      <article class="feature-card" style="--project-accent:#e49b8f">
-        <a class="feature-media" href="https://eao.nathanchengyi.com/" target="_blank" rel="noopener" aria-label="Open Everyone At Once">
-          <div class="feature-window">
-            <div class="feature-window-bar"><span class="feature-window-dots"><i></i><i></i><i></i></span><span>Independent · Live</span></div>
-            <img src="assets/preview-everyone-at-once.jpg" alt="Everyone At Once character matching product" loading="lazy">
-          </div>
-        </a>
-        <div class="feature-copy">
-          <div class="feature-kicker"><span class="feature-no">Selected 04</span><span>0→1 product · 2026</span></div>
-          <h3 class="feature-title"><a href="https://eao.nathanchengyi.com/" target="_blank" rel="noopener">Everyone At Once</a></h3>
-          <p class="feature-summary">Twelve situational questions become a mix of fictional characters through LLM simulation and Bayesian inference.</p>
-          <div class="feature-proof"><span>Public launch</span><span>~12ms inference</span></div>
-          <a class="feature-link" href="https://eao.nathanchengyi.com/" target="_blank" rel="noopener">Try it live <span class="arrow">↗</span></a>
+          <div class="feature-kicker"><span class="feature-no">Selected 03</span><span>Hong Kong · 2025</span></div>
+          <h3 class="feature-title"><a href="https://www.welldify.io/" target="_blank" rel="noopener">Welldify</a></h3>
+          <p class="feature-summary">Evaluated an LLM trained on <em>66,000 labeled sentences</em> for journal-based wellbeing scoring against PERMA and DASS frameworks, and built a semi-automated DeepSeek and generative-image workflow that shipped 30+ psychoeducation carousel sets.</p>
+          <div class="feature-proof"><span>LLM evaluation</span><span>PERMA + DASS</span><span>30+ carousel sets</span></div>
+          <a class="feature-link" href="https://www.welldify.io/" target="_blank" rel="noopener">Visit product <span class="arrow">↗</span></a>
         </div>
       </article>
     </div>
     <div class="feature-secondary">
       <span class="mark">◆</span>
-      <p><strong>Welldify</strong> · Supported LLM monitoring across 66,000 labeled sentences and built a semi-automated workflow that shipped 30+ psychoeducation carousel sets.</p>
-      <a href="https://www.welldify.io/" target="_blank" rel="noopener">View work ↗</a>
+      <p><strong>VStandby Studio</strong> · 24-hour BETA AI hackathon build: a real-time AI companion that detects livestream highlights, follows caption context and reacts through a selectable persona.</p>
+      <a href="https://cofun.harrycn.com/#product" target="_blank" rel="noopener">Open demo ↗</a>
+    </div>
+    <div class="feature-secondary">
+      <span class="mark">◆</span>
+      <p><strong>Everyone At Once</strong> · Independent 0→1 product: twelve situational questions become a mix of fictional characters through LLM simulation and Bayesian inference.</p>
+      <a href="https://eao.nathanchengyi.com/" target="_blank" rel="noopener">Try it live ↗</a>
     </div>
   </section>
 
@@ -4455,15 +4446,15 @@
         <div class="meta"><span class="year">'26</span>UC Berkeley<br>w/ A. Collins</div>
         <div class="project-body">
           <a href="https://ccn.studentorg.berkeley.edu/" class="project-title" target="_blank" rel="noopener">CCN Lab <span class="out">↗</span></a>
-          <p class="project-desc">Artificial neural networks for parameter estimation and model identification in computational cognitive models — asking <em>when ML systems can replace expensive Bayesian inference</em>, and where they shouldn't.</p>
-          <div class="tags"><span class="tag">neural-nets</span><span class="tag">bayesian</span><span class="tag">cognitive-models</span></div>
+          <p class="project-desc">Built the simulation-based inference pipeline (TensorFlow GRU) that recovers reinforcement-learning-with-forgetting parameters and tells that model apart from a working-memory model in simulated behavior — at <em>27,000 agents per model</em> the classifier reaches 0.92 accuracy against a 0.975 likelihood benchmark. <em>Second author</em> on a tutorial manuscript in preparation with Ti-Fen Pan and Anne Collins.</p>
+          <div class="tags"><span class="tag">simulation-based-inference</span><span class="tag">neural-nets</span><span class="tag">cognitive-models</span><span class="tag">tensorflow</span></div>
         </div>
       </article>
       <article class="project">
         <div class="meta"><span class="year">'25</span>HKU<br>w/ F. Cao</div>
         <div class="project-body">
           <a href="https://neurolead.hku.hk/" class="project-title" target="_blank" rel="noopener">NeuroLeaD Lab <span class="out">↗</span></a>
-          <p class="project-desc"><em>Atypical Functional Network Trajectories in Autism Spectrum Disorder</em> — <em>invited revision at PNAS, 2026</em>. Deployed neuroimaging pipelines on HKU's HPC (a first for the lab), processed ABIDE-I/II and ADHD-200 datasets, and found that ASD subjects show <em>elevated similarity to normative atlases in later life</em>.</p>
+          <p class="project-desc"><em>Developmental Trajectories of Brain Functional Connectivity in Autism Spectrum Disorder</em> — third author, <em>invited revision at PNAS, 2026</em>. Deployed neuroimaging pipelines on HKU's HPC (a first for the lab) to process ABIDE-I/II and ADHD-200, and ran a preliminary brain-age analysis comparing individual functional topography with a <em>30,000-subject normative atlas</em>.</p>
           <div class="tags"><span class="tag">neuroimaging</span><span class="tag">fmri</span><span class="tag">hpc</span><span class="tag">pnas-2026</span></div>
         </div>
       </article>
@@ -4586,7 +4577,7 @@
     <span>Berkeley · Hong Kong</span>
   </div>
   <div class="right">
-    <span>Last updated · July 2026</span>
+    <span>Last updated · August 2026</span>
     <a href="mailto:hi@nathanchengyi.com">hi@nathanchengyi.com</a>
   </div>
 </footer>
