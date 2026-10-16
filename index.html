@@ -3674,6 +3674,8 @@
     max-width: 640px;
   }
   .project-desc em { color: var(--ink); font-style: italic; }
+  .project-desc a { color: inherit; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 3px; transition: color .25s; }
+  .project-desc a:hover, .project-desc a:hover em { color: var(--accent); }
   .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
   .tags .tag {
     font-family: var(--font-mono);
@@ -4454,7 +4456,7 @@
         <div class="meta"><span class="year">'25</span>HKU<br>w/ F. Cao</div>
         <div class="project-body">
           <a href="https://neurolead.hku.hk/" class="project-title" target="_blank" rel="noopener">NeuroLeaD Lab <span class="out">↗</span></a>
-          <p class="project-desc"><em>In press at PNAS</em>: third author on <em>Two clusters of brain regions with distinct age-related profiles of functional connectivity in Autism Spectrum Disorder</em>. Built the lab's first HPC pipeline for fMRI preprocessing and ran it on ABIDE-I/II and ADHD-200 (about 3,200 subjects), then a preliminary brain-age analysis comparing individual functional topography with a <em>30,000-subject normative atlas</em>.</p>
+          <p class="project-desc"><em>Published in PNAS</em>: third author on <a href="https://doi.org/10.1073/pnas.2617358123" target="_blank" rel="noopener"><em>Two clusters of brain regions with distinct age-related profiles of functional connectivity in autism spectrum disorder</em></a>. Built the lab's first HPC pipeline for fMRI preprocessing and ran it on ABIDE-I/II and ADHD-200 (about 3,200 subjects), then a preliminary brain-age analysis comparing individual functional topography with a <em>30,000-subject normative atlas</em>.</p>
           <div class="tags"><span class="tag">neuroimaging</span><span class="tag">fmri</span><span class="tag">hpc</span><span class="tag">pnas-2026</span></div>
         </div>
       </article>
