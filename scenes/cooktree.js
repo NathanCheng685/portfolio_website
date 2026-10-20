@@ -42,26 +42,57 @@ export default function cooktree(card, ctx) {
     refresh();
   }
 
+  // One row of the tree: start from the wanted centers, then push nodes apart by their
+  // measured widths so none overlap, and keep the row inside the tree. A row too wide
+  // for the tree (narrow phones) splits into two lanes. Returns the lanes.
+  function packRow(row, width) {
+    const gap = 6;
+    const margin = 4;
+    row.sort((a, b) => a.want - b.want);
+    const total = row.reduce((sum, n) => sum + n.w, 0) + gap * (row.length - 1);
+    const lanes = total > width - 2 * margin && row.length > 1 ? [row.filter((_, i) => i % 2 === 0), row.filter((_, i) => i % 2 === 1)] : [row];
+    for (const lane of lanes) {
+      let edge = margin;
+      for (const n of lane) {
+        n.x = Math.max(n.want, edge + n.w / 2);
+        edge = n.x + n.w / 2 + gap;
+      }
+      edge = width - margin;
+      for (let i = lane.length - 1; i >= 0; i -= 1) {
+        lane[i].x = Math.min(lane[i].x, edge - lane[i].w / 2);
+        edge = lane[i].x - lane[i].w / 2 - gap;
+      }
+    }
+    return lanes;
+  }
+
   function place() {
     const width = tree.clientWidth;
     const height = tree.clientHeight;
     if (!width || !height) return;
     const parts = recipe.parts.length;
     const at = {};
-    const rowY = [height * 0.1, height * 0.48, height * 0.86];
     const spread = Math.min(124, width / 4.4);
-    tree.querySelectorAll(".node").forEach(node => {
+    // Narrow trees use smaller nodes before splitting any row.
+    tree.classList.toggle("is-tight", width < 360);
+    const nodes = [...tree.querySelectorAll(".node")].map(node => {
       const level = Number(node.dataset.level);
-      let x = width / 2;
-      if (level >= 1) x = (Number(node.dataset.part) + 0.5) / parts * width;
+      let want = width / 2;
+      if (level >= 1) want = (Number(node.dataset.part) + 0.5) / parts * width;
       if (level === 2) {
         const part = recipe.parts[Number(node.dataset.part)];
-        x += (Number(node.dataset.index) - (part.items.length - 1) / 2) * spread;
+        want += (Number(node.dataset.index) - (part.items.length - 1) / 2) * spread;
       }
-      x = Math.min(width - 56, Math.max(56, x));
+      return { node, level, want, w: node.offsetWidth + 1 }; // offsetWidth rounds down
+    });
+    // Rows top to bottom; with a split row, all rows are spaced evenly down the tree.
+    const rows = [0, 1, 2].flatMap(level => packRow(nodes.filter(n => n.level === level), width));
+    const fractions = rows.length === 3 ? [0.1, 0.48, 0.86] : rows.map((_, i) => 0.08 + 0.8 * i / (rows.length - 1));
+    rows.forEach((row, i) => row.forEach(n => { n.y = height * fractions[i]; }));
+    nodes.forEach(({ node, level, x, y }) => {
       node.style.left = `${x}px`;
-      node.style.top = `${rowY[level]}px`;
-      at[node.dataset.level === "0" ? "root" : level === 1 ? `p${node.dataset.part}` : `p${node.dataset.part}i${node.dataset.index}`] = { x, y: rowY[level], node };
+      node.style.top = `${y}px`;
+      at[level === 0 ? "root" : level === 1 ? `p${node.dataset.part}` : `p${node.dataset.part}i${node.dataset.index}`] = { x, y, node };
     });
     const curve = (a, b) => `M${a.x},${a.y + 18}C${a.x},${(a.y + b.y) / 2} ${b.x},${(a.y + b.y) / 2} ${b.x},${b.y - 18}`;
     let paths = "";

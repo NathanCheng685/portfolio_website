@@ -51,7 +51,7 @@ Slug rules:
 
 - lowercase letters, numbers, and hyphens only;
 - must begin and end with a letter or number;
-- cannot be `assets`, `portfolio`, `www`, or `api`;
+- cannot be `assets`, `portfolio`, `www`, `api`, `data`, or `scenes`;
 - every site must contain `index.html`.
 
 Use relative URLs such as `assets/cover.webp` or `./styles.css`. Root-relative

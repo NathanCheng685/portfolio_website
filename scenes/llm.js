@@ -230,7 +230,7 @@ export default function llm(card, ctx) {
       renderPanel();
     }
     describe(first);
-    ctx.actor()?.play([F.thumbs], { fps: 0.8, rest: F.think });
+    ctx.actor()?.idle(F.thumbs);
   }
 
   function load(i, announce = false) {
@@ -269,13 +269,13 @@ export default function llm(card, ctx) {
       $("#gamble-next").disabled = false;
     })
     .catch(() => {
-      $(".gamble-empty").textContent = "The pilot data could not load. Serve this folder over HTTP to play.";
+      $(".gamble-empty").textContent = "The pilot data could not load. Reload the page to try again.";
     });
 
   return {
     pose: F.think,
     enter(actor) {
-      actor?.idle(F.think);
+      actor?.idle(pick === null ? F.think : F.thumbs);
     },
   };
 }

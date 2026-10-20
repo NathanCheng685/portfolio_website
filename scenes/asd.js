@@ -46,7 +46,7 @@ export default function asd(card) {
   let smooth = {};
   let share = Number(input.value) / 1000;
   let lastShare = share;
-  let travelled = 0;
+  let traveled = 0;
   let dragging = false;
   let sweepTimer = 0;
   let swept = false;
@@ -174,11 +174,11 @@ export default function asd(card) {
   function stepTo(s) {
     const delta = s - lastShare;
     if (delta !== 0) {
-      travelled += Math.abs(delta) * 100;
+      traveled += Math.abs(delta) * 100;
       if (!motion.reduced) {
         actor.stop();
         actor.face(delta);
-        actor.set(Math.floor(travelled / 2.4) % 2 ? F.gripStepA : F.gripStepB);
+        actor.set(Math.floor(traveled / 2.4) % 2 ? F.gripStepA : F.gripStepB);
       }
     }
     lastShare = s;
@@ -261,7 +261,7 @@ export default function asd(card) {
       draw();
     })
     .catch(() => {
-      stats.textContent = "The data could not load. Serve this folder over HTTP to see the chart.";
+      stats.textContent = "The data could not load. Reload the page to try again.";
     });
 
   return {

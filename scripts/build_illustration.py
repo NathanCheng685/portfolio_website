@@ -16,6 +16,7 @@ import math
 from pathlib import Path
 
 CELL_W, CELL_H = 160, 210
+CELL_INSET = 3
 FLOOR = 204
 HIP_X = 80
 
@@ -255,7 +256,7 @@ def pan_props(tossed):
             return []
         h = info["near_hand"]
         hx, hy = h[0], h[1] - dy
-        c = (hx + 16, hy - (3 if tossed else 0))
+        c = (hx + 10, hy - (3 if tossed else 0))
         tilt = -6 if tossed else 0
         out = [line((hx - 2, hy), (c[0] - 10, c[1]), "#8a5a3c", 3.2),
                f'<ellipse cx="{f(c[0])}" cy="{f(c[1])}" rx="12" ry="3.4" fill="#2f3136" transform="rotate({tilt} {f(c[0])} {f(c[1])})"/>',
@@ -315,7 +316,9 @@ for i in range(4, 8):
 
 def svg():
     width = CELL_W * len(FRAMES)
-    clips = "".join(f'<clipPath id="c{i}"><rect x="{i * CELL_W}" y="0" width="{CELL_W}" height="{CELL_H}"/></clipPath>' for i in range(len(FRAMES)))
+    # Each cell is clipped 3 units inside its edges: when the browser scales the atlas, a
+    # drawing that touched the edge would show as a stray pixel beside the next frame.
+    clips = "".join(f'<clipPath id="c{i}"><rect x="{i * CELL_W + CELL_INSET}" y="0" width="{CELL_W - 2 * CELL_INSET}" height="{CELL_H}"/></clipPath>' for i in range(len(FRAMES)))
     body_svg = "".join(f'<g clip-path="url(#c{i})"><g transform="translate({i * CELL_W} 0)">{content}</g></g>' for i, (_, content) in enumerate(FRAMES))
     grain = (f'<filter id="grain" x="0" y="0" width="{width}" height="{CELL_H}" filterUnits="userSpaceOnUse">'
              '<feTurbulence type="fractalNoise" baseFrequency="1.3" numOctaves="1" seed="9" result="noise"/>'

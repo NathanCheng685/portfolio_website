@@ -220,6 +220,7 @@ function layout() {
   const keep = active >= 0 ? active : Math.round(position);
   isTrack = trackQuery.matches;
   root.classList.toggle("is-track", isTrack);
+  if ("scrollRestoration" in history) history.scrollRestoration = isTrack ? "manual" : "auto";
   leave();
   if (!isTrack) {
     track.style.height = "";
@@ -280,8 +281,13 @@ document.addEventListener("focusin", event => {
   }, 0);
 });
 
+// Phone toolbars resize the window on every scroll; in the stack only a width or mode
+// change needs a new layout, otherwise each card's entry would replay.
 let resizeFrame = 0;
+let layoutWidth = window.innerWidth;
 window.addEventListener("resize", () => {
+  if (!isTrack && !trackQuery.matches && window.innerWidth === layoutWidth) return;
+  layoutWidth = window.innerWidth;
   cancelAnimationFrame(resizeFrame);
   resizeFrame = requestAnimationFrame(layout);
 });
@@ -304,5 +310,4 @@ window.addEventListener("load", () => requestAnimationFrame(followHash));
 
 applyMotion();
 position = Math.max(0, sceneFromHash());
-if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 layout();

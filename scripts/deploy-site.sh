@@ -43,7 +43,7 @@ else
   fi
 
   case "$site" in
-    assets|api|portfolio|www)
+    assets|api|portfolio|www|data|scenes)
       echo "Reserved site slug: $site"
       exit 1
       ;;
@@ -99,20 +99,25 @@ cleanup() {
 trap cleanup EXIT
 
 sudo mkdir -p "$stage" "$backup"
-sudo tar -xzf "$remote_archive" -C "$stage"
+sudo tar --no-same-owner -xzf "$remote_archive" -C "$stage"
 
 if [[ "$site" == "portfolio" ]]; then
   [[ -f "$stage/index.html" && -d "$stage/assets" ]]
-  # Swap each packaged entry in, keeping the old one in the backup.
+  # Swap each packaged entry in, keeping the old one in the backup. index.html goes
+  # last so the new page never loads before its scripts and styles are in place.
+  sudo chmod -R u=rwX,go=rX "$stage"
   for entry in "$stage"/*; do
     name="$(basename "$entry")"
+    [[ "$name" == "index.html" ]] && continue
     if [[ -e "/var/www/html/$name" ]]; then
       sudo mv "/var/www/html/$name" "$backup/$name"
     fi
     sudo mv "$entry" "/var/www/html/$name"
   done
-  sudo chmod -R u=rwX,go=rX /var/www/html/index.html /var/www/html/site.css /var/www/html/*.js \
-    /var/www/html/scenes /var/www/html/data /var/www/html/assets
+  if [[ -e /var/www/html/index.html ]]; then
+    sudo cp -a /var/www/html/index.html "$backup/index.html"
+  fi
+  sudo mv -f "$stage/index.html" /var/www/html/index.html
 else
   [[ -f "$stage/index.html" ]]
   target="/var/www/html/$site"

@@ -59,7 +59,9 @@ export default function sbi(card, ctx) {
   const learner = () => learners[index];
   const fitOf = curve => Math.round(100 * clamp(1 - Math.max(0, rmse(curve, learner().curve) - learner().floor) / MATCH_SCALE, 0, 1));
   const x = i => 6 + i / 12 * (size.w - 52);
-  const y = v => 22 + (Y_TOP - v) / (Y_TOP - Y_BOTTOM) * (size.h - 48);
+  // The legend wraps on narrow plots, so the chart starts below its real height.
+  let top = 22;
+  const y = v => top + (Y_TOP - v) / (Y_TOP - Y_BOTTOM) * (size.h - top - 26);
   const pathOf = curve => curve.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join("");
 
   // The best fit any dial setting can reach is the true parameters' own curve:
@@ -78,6 +80,7 @@ export default function sbi(card, ctx) {
   function draw() {
     size = { w: plot.clientWidth, h: plot.clientHeight };
     if (!size.w || !size.h || !learners.length) return;
+    top = Math.max(22, plot.querySelector(".sbi-legend").offsetHeight + 10);
     svg.setAttribute("viewBox", `0 0 ${size.w} ${size.h}`);
     svg.querySelectorAll("g").forEach(node => node.remove());
     plot.querySelectorAll(".axis-label").forEach(node => node.remove());
@@ -159,7 +162,7 @@ export default function sbi(card, ctx) {
       for (const [kind, v] of [["true", l.true[d.key]], ["network", l.network[d.key]]]) {
         const tick = document.createElement("span");
         tick.className = `dial-tick ${kind}`;
-        tick.style.left = `calc(7px + (100% - 14px) * ${share(snap(d.key, v))})`;
+        tick.style.left = `calc(var(--thumb) / 2 + (100% - var(--thumb)) * ${share(snap(d.key, v))})`;
         input.insertAdjacentElement("afterend", tick);
       }
     }
@@ -172,7 +175,7 @@ export default function sbi(card, ctx) {
     table.hidden = false;
     fillTable();
     placeTicks();
-    paintNetwork();
+    draw();
     revealButton.textContent = "Revealed";
     ctx.actor()?.play([F.lookA, F.lookB, F.lookA, F.thumbs], { fps: 4, rest: F.lookA });
   }
@@ -186,8 +189,7 @@ export default function sbi(card, ctx) {
     table.hidden = true;
     clearTicks();
     revealButton.textContent = "Reveal the parameters";
-    paintTarget();
-    paintNetwork();
+    draw();
     update();
   }
 
@@ -215,7 +217,7 @@ export default function sbi(card, ctx) {
       draw();
     })
     .catch(() => {
-      hint.textContent = "The learner data could not load. Serve this folder over HTTP to play.";
+      hint.textContent = "The learner data could not load. Reload the page to try again.";
     });
 
   return {
