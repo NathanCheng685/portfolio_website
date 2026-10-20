@@ -1,0 +1,460 @@
+{
+ "source": "cot-human-likeness pilot (run 2026-10-11, analyzed 2026-10-18), choices13k pairs from Psych-101",
+ "summary": {
+  "gambles": 100,
+  "onNorm": 74,
+  "offNorm": 25,
+  "tied": 1,
+  "peopleHigher": 0.6276,
+  "settings": [
+   {
+    "model": "qwen3-32b",
+    "level": "none",
+    "replies": 1000,
+    "higher": 0.628,
+    "like": 0.544,
+    "likeOn": 0.5652,
+    "likeOff": 0.4831,
+    "medianTokens": 0.0
+   },
+   {
+    "model": "qwen3-32b",
+    "level": "thinking",
+    "replies": 1000,
+    "higher": 0.968,
+    "like": 0.6287,
+    "likeOn": 0.7029,
+    "likeOff": 0.4141,
+    "medianTokens": 803.0
+   },
+   {
+    "model": "gpt-oss-20b",
+    "level": "low",
+    "replies": 1000,
+    "higher": 0.929,
+    "like": 0.6198,
+    "likeOn": 0.6872,
+    "likeOff": 0.4251,
+    "medianTokens": 76.0
+   },
+   {
+    "model": "gpt-oss-20b",
+    "level": "medium",
+    "replies": 1000,
+    "higher": 0.98,
+    "like": 0.625,
+    "likeOn": 0.7026,
+    "likeOff": 0.4002,
+    "medianTokens": 266.5
+   },
+   {
+    "model": "gpt-oss-20b",
+    "level": "high",
+    "replies": 998,
+    "higher": 0.99,
+    "like": 0.625,
+    "likeOn": 0.7038,
+    "likeOff": 0.3973,
+    "medianTokens": 623.0
+   }
+  ]
+ },
+ "gambles": [
+  {
+   "id": "c13k_0838",
+   "options": [
+    {
+     "text": "13.0 points with 100.0% chance, or 13.0 points with 0.0% chance.",
+     "short": "the sure 13",
+     "ev": 13.0,
+     "outcomes": [
+      {
+       "value": 13.0,
+       "p": 1.0
+      }
+     ]
+    },
+    {
+     "text": "1.0 points with 40.0% chance, or 17.0 points with 60.0% chance.",
+     "short": "the gamble",
+     "ev": 10.6,
+     "outcomes": [
+      {
+       "value": 17.0,
+       "p": 0.6
+      },
+      {
+       "value": 1.0,
+       "p": 0.4
+      }
+     ]
+    }
+   ],
+   "higher": 0,
+   "people": {
+    "choices": 65,
+    "people": 13,
+    "shares": [
+     0.707692,
+     0.292308
+    ]
+   },
+   "settings": [
+    {
+     "model": "qwen3-32b",
+     "level": "none",
+     "n": 10,
+     "shares": [
+      0.1,
+      0.9
+     ],
+     "tokens": 0
+    },
+    {
+     "model": "qwen3-32b",
+     "level": "thinking",
+     "n": 10,
+     "shares": [
+      1.0,
+      0.0
+     ],
+     "tokens": 573
+    },
+    {
+     "model": "gpt-oss-20b",
+     "level": "low",
+     "n": 10,
+     "shares": [
+      1.0,
+      0.0
+     ],
+     "tokens": 52
+    },
+    {
+     "model": "gpt-oss-20b",
+     "level": "medium",
+     "n": 10,
+     "shares": [
+      1.0,
+      0.0
+     ],
+     "tokens": 225
+    },
+    {
+     "model": "gpt-oss-20b",
+     "level": "high",
+     "n": 10,
+     "shares": [
+      1.0,
+      0.0
+     ],
+     "tokens": 559
+    }
+   ],
+   "quote": {
+    "model": "gpt-oss-20b",
+    "level": "low",
+    "tokens": 46,
+    "text": "Should pick option maximizing expected value. A: 13 points. B: 0.4 × 1 + 0.6 × 17 = 0.4 + 10.2 = 10.6. So choose A."
+   }
+  },
+  {
+   "id": "c13k_1583",
+   "options": [
+    {
+     "text": "26.0 points with 100.0% chance, or 26.0 points with 0.0% chance.",
+     "short": "the sure 26",
+     "ev": 26.0,
+     "outcomes": [
+      {
+       "value": 26.0,
+       "p": 1.0
+      }
+     ]
+    },
+    {
+     "text": "-23.0 points with 20.0% chance, or 40.0 points with 80.0% chance.",
+     "short": "the gamble",
+     "ev": 27.4,
+     "outcomes": [
+      {
+       "value": 40.0,
+       "p": 0.8
+      },
+      {
+       "value": -23.0,
+       "p": 0.2
+      }
+     ]
+    }
+   ],
+   "higher": 1,
+   "people": {
+    "choices": 75,
+    "people": 15,
+    "shares": [
+     0.586667,
+     0.413333
+    ]
+   },
+   "settings": [
+    {
+     "model": "qwen3-32b",
+     "level": "none",
+     "n": 10,
+     "shares": [
+      0.8,
+      0.2
+     ],
+     "tokens": 0
+    },
+    {
+     "model": "qwen3-32b",
+     "level": "thinking",
+     "n": 10,
+     "shares": [
+      0.1,
+      0.9
+     ],
+     "tokens": 1066
+    },
+    {
+     "model": "gpt-oss-20b",
+     "level": "low",
+     "n": 10,
+     "shares": [
+      0.3,
+      0.7
+     ],
+     "tokens": 44
+    },
+    {
+     "model": "gpt-oss-20b",
+     "level": "medium",
+     "n": 10,
+     "shares": [
+      0.0,
+      1.0
+     ],
+     "tokens": 235
+    },
+    {
+     "model": "gpt-oss-20b",
+     "level": "high",
+     "n": 10,
+     "shares": [
+      0.0,
+      1.0
+     ],
+     "tokens": 978
+    }
+   ],
+   "quote": {
+    "model": "gpt-oss-20b",
+    "level": "low",
+    "tokens": 53,
+    "text": "Need choose one. Probably option A gives guaranteed 26. Option B expected value = (−23) × 0.2 + 40 × 0.8 = −4.6 + 32 = 27.4 > 26. So choose B expected better. return B."
+   }
+  },
+  {
+   "id": "c13k_1602",
+   "options": [
+    {
+     "text": "3.0 points with 100.0% chance, or 3.0 points with 0.0% chance.",
+     "short": "the sure 3",
+     "ev": 3.0,
+     "outcomes": [
+      {
+       "value": 3.0,
+       "p": 1.0
+      }
+     ]
+    },
+    {
+     "text": "-10.0 points with 25.0% chance, or 22.0 points with 75.0% chance.",
+     "short": "the gamble",
+     "ev": 14.0,
+     "outcomes": [
+      {
+       "value": 22.0,
+       "p": 0.75
+      },
+      {
+       "value": -10.0,
+       "p": 0.25
+      }
+     ]
+    }
+   ],
+   "higher": 1,
+   "people": {
+    "choices": 65,
+    "people": 13,
+    "shares": [
+     0.353846,
+     0.646154
+    ]
+   },
+   "settings": [
+    {
+     "model": "qwen3-32b",
+     "level": "none",
+     "n": 10,
+     "shares": [
+      0.7,
+      0.3
+     ],
+     "tokens": 0
+    },
+    {
+     "model": "qwen3-32b",
+     "level": "thinking",
+     "n": 10,
+     "shares": [
+      0.0,
+      1.0
+     ],
+     "tokens": 817
+    },
+    {
+     "model": "gpt-oss-20b",
+     "level": "low",
+     "n": 10,
+     "shares": [
+      0.1,
+      0.9
+     ],
+     "tokens": 67
+    },
+    {
+     "model": "gpt-oss-20b",
+     "level": "medium",
+     "n": 10,
+     "shares": [
+      0.0,
+      1.0
+     ],
+     "tokens": 185
+    },
+    {
+     "model": "gpt-oss-20b",
+     "level": "high",
+     "n": 10,
+     "shares": [
+      0.0,
+      1.0
+     ],
+     "tokens": 705
+    }
+   ],
+   "quote": {
+    "model": "gpt-oss-20b",
+    "level": "low",
+    "tokens": 50,
+    "text": "Choose the option with higher expected value. Option A expected value 3. Option B: −10 × 0.25 + 22 × 0.75 = −2.5 + 16.5 = 14. So B higher. So choose B."
+   }
+  },
+  {
+   "id": "c13k_0347",
+   "options": [
+    {
+     "text": "16.0 points with 40.0% chance, or -4.0 points with 60.0% chance.",
+     "short": "the likelier win",
+     "ev": 4.0,
+     "outcomes": [
+      {
+       "value": -4.0,
+       "p": 0.6
+      },
+      {
+       "value": 16.0,
+       "p": 0.4
+      }
+     ]
+    },
+    {
+     "text": "-4.0 points with 80.0% chance, or 64.0 points with 20.0% chance.",
+     "short": "the long shot",
+     "ev": 9.6,
+     "outcomes": [
+      {
+       "value": -4.0,
+       "p": 0.8
+      },
+      {
+       "value": 64.0,
+       "p": 0.2
+      }
+     ]
+    }
+   ],
+   "higher": 1,
+   "people": {
+    "choices": 85,
+    "people": 17,
+    "shares": [
+     0.564706,
+     0.435294
+    ]
+   },
+   "settings": [
+    {
+     "model": "qwen3-32b",
+     "level": "none",
+     "n": 10,
+     "shares": [
+      0.8,
+      0.2
+     ],
+     "tokens": 0
+    },
+    {
+     "model": "qwen3-32b",
+     "level": "thinking",
+     "n": 10,
+     "shares": [
+      0.0,
+      1.0
+     ],
+     "tokens": 600
+    },
+    {
+     "model": "gpt-oss-20b",
+     "level": "low",
+     "n": 10,
+     "shares": [
+      0.0,
+      1.0
+     ],
+     "tokens": 69
+    },
+    {
+     "model": "gpt-oss-20b",
+     "level": "medium",
+     "n": 10,
+     "shares": [
+      0.2,
+      0.8
+     ],
+     "tokens": 153
+    },
+    {
+     "model": "gpt-oss-20b",
+     "level": "high",
+     "n": 10,
+     "shares": [
+      0.0,
+      1.0
+     ],
+     "tokens": 281
+    }
+   ],
+   "quote": {
+    "model": "gpt-oss-20b",
+    "level": "low",
+    "tokens": 75,
+    "text": "We choose? Probably option A has expected value: 16 × 0.4 + (−4) × 0.6 = 6.4 − 2.4 = 4.0. Option B: −4 × 0.8 + 64 × 0.2 = −3.2 + 12.8 = 9.6. So B higher expected. Likely choose B."
+   }
+  }
+ ]
+}

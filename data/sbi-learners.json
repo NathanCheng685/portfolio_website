@@ -1,0 +1,220 @@
+{
+ "source": "sbi-cognitive-models (UC Berkeley CCN Lab), results as of October 2026: test set rand500_st11 (500 simulated RLF learners), network trained on 27,000 simulated learners (results/rlf_6s3a/rand500/ann_recovery_per_agent_27000a.csv), MLE and MAP baselines on the same learners, RLF-vs-WM identification (results/rlf_6s3a/identification).",
+ "task": {
+  "stimuli": 6,
+  "actions": 3,
+  "blocks": 12,
+  "presentations": 13,
+  "trials_per_learner": 936,
+  "feedback": "deterministic"
+ },
+ "ranges": {
+  "alpha": [
+   0.2,
+   0.8
+  ],
+  "beta": [
+   4,
+   16
+  ],
+  "phi": [
+   0,
+   0.4
+  ],
+  "kappa": [
+   -1,
+   1
+  ]
+ },
+ "recovery": {
+  "test_learners": 500,
+  "training_learners": 27000,
+  "network": {
+   "alpha": {
+    "r": 0.812,
+    "rmse": 0.105
+   },
+   "beta": {
+    "r": 0.79,
+    "rmse": 0.105
+   },
+   "phi": {
+    "r": 0.888,
+    "rmse": 0.033
+   },
+   "stickiness": {
+    "r": 0.979,
+    "rmse": 0.136
+   }
+  },
+  "mle": {
+   "alpha": {
+    "r": 0.784,
+    "rmse": 0.134
+   },
+   "beta": {
+    "r": 0.714,
+    "rmse": 0.197
+   },
+   "phi": {
+    "r": 0.599,
+    "rmse": 0.097
+   },
+   "stickiness": {
+    "r": 0.972,
+    "rmse": 0.142
+   }
+  },
+  "map": {
+   "alpha": {
+    "r": 0.839,
+    "rmse": 0.106
+   },
+   "beta": {
+    "r": 0.785,
+    "rmse": 0.123
+   },
+   "phi": {
+    "r": 0.891,
+    "rmse": 0.034
+   },
+   "stickiness": {
+    "r": 0.983,
+    "rmse": 0.112
+   }
+  }
+ },
+ "identification": {
+  "network_accuracy": 0.951,
+  "network_training_per_model": 27000,
+  "features": 4,
+  "likelihood_benchmark": 0.961,
+  "test_learners": 1000
+ },
+ "learners": [
+  {
+   "id": 280,
+   "name": "a fast learner who forgets",
+   "curve": [
+    0.3333,
+    0.5972,
+    0.7222,
+    0.7083,
+    0.7222,
+    0.6667,
+    0.7222,
+    0.7778,
+    0.7222,
+    0.7083,
+    0.6528,
+    0.6389,
+    0.6806
+   ],
+   "true": {
+    "alpha": 0.641,
+    "beta": 10.94,
+    "phi": 0.212,
+    "kappa": 0.05
+   },
+   "network": {
+    "alpha": 0.643,
+    "beta": 7.53,
+    "phi": 0.158,
+    "kappa": 0.073
+   }
+  },
+  {
+   "id": 11,
+   "name": "an explorer",
+   "curve": [
+    0.3611,
+    0.5833,
+    0.7222,
+    0.75,
+    0.8472,
+    0.875,
+    0.875,
+    0.875,
+    0.875,
+    0.8889,
+    0.8333,
+    0.9306,
+    0.8194
+   ],
+   "true": {
+    "alpha": 0.455,
+    "beta": 4.43,
+    "phi": 0.04,
+    "kappa": -0.047
+   },
+   "network": {
+    "alpha": 0.372,
+    "beta": 6.1,
+    "phi": 0.054,
+    "kappa": -0.17
+   }
+  },
+  {
+   "id": 336,
+   "name": "a sticky learner",
+   "curve": [
+    0.3889,
+    0.3889,
+    0.4167,
+    0.4028,
+    0.4167,
+    0.3889,
+    0.3889,
+    0.3472,
+    0.4028,
+    0.375,
+    0.375,
+    0.3611,
+    0.3611
+   ],
+   "true": {
+    "alpha": 0.504,
+    "beta": 9.27,
+    "phi": 0.082,
+    "kappa": 0.942
+   },
+   "network": {
+    "alpha": 0.396,
+    "beta": 10.48,
+    "phi": 0.091,
+    "kappa": 0.717
+   }
+  },
+  {
+   "id": 102,
+   "name": "a quick, steady learner",
+   "curve": [
+    0.3611,
+    0.6667,
+    0.9167,
+    0.9861,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "true": {
+    "alpha": 0.708,
+    "beta": 14.12,
+    "phi": 0.024,
+    "kappa": -0.244
+   },
+   "network": {
+    "alpha": 0.641,
+    "beta": 13.07,
+    "phi": 0.042,
+    "kappa": -0.205
+   }
+  }
+ ]
+}
