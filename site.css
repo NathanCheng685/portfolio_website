@@ -342,7 +342,9 @@ button.node[aria-pressed="true"] small { color: #b9bab3; }
 
 /* Hello */
 .hello-card .copy h3 { font-size: clamp(44px, 5vw, 80px); }
-.mail { font-size: clamp(20px, 2vw, 28px); letter-spacing: -0.02em; border-bottom: 2px solid var(--ink); align-self: flex-start; padding-bottom: 2px; }
+/* The address is about 10.2 em wide; sizing it to its column keeps it whole at every window size. */
+.hello-card .copy { container-type: inline-size; }
+.mail { font-size: clamp(18px, 9.4cqi, 28px); letter-spacing: -0.02em; border-bottom: 2px solid var(--ink); align-self: flex-start; padding-bottom: 2px; white-space: nowrap; }
 .mail:hover { color: var(--accent); border-color: var(--accent); }
 .links { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 15px; margin-top: 8px; }
 .links a { color: var(--muted); }
