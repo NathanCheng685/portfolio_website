@@ -61,7 +61,7 @@
             <div class="frame split">
               <div class="copy">
                 <h3>Two kinds of difference.</h3>
-                <p>Across 2,608 people aged 5 to 64, connectivity differences in autism followed two age patterns. Drag me along the age axis.</p>
+                <p>Brain connectivity in autism, 2,608 people aged 5 to 64. Drag me along the age axis.</p>
                 <svg class="brain-defs" aria-hidden="true" focusable="false">
                   <defs>
                     <clipPath id="brain-clip"><path d="M12 50C6 36 12 18 30 10C46 3 70 3 86 9C102 15 113 28 112 42C111 52 104 58 95 59C92 64 85 67 78 65L70 64C64 70 52 72 44 68C36 70 26 68 20 62C15 58 13 54 12 50Z"/></clipPath>
@@ -79,10 +79,10 @@
                   </defs>
                 </svg>
                 <ul class="legend">
-                  <li><svg class="brain-icon persistent" viewBox="0 0 120 86" role="img" aria-label="Back and top of the brain highlighted"><use href="#brain"/></svg><div><strong>Persistent</strong><span>Sensory and motor areas: visual and parieto-occipital cortex, precuneus, postcentral gyrus, posterior cingulate.</span></div></li>
-                  <li><svg class="brain-icon catchup" viewBox="0 0 120 86" role="img" aria-label="Front and side of the brain highlighted"><use href="#brain"/></svg><div><strong>Catches up by adulthood</strong><span>Association areas: frontal and temporal cortex, medial prefrontal.</span></div></li>
+                  <li><svg class="brain-icon persistent" viewBox="0 0 120 86" role="img" aria-label="Back and top of the brain highlighted"><use href="#brain"/></svg><div><strong>Persistent</strong><span>Sensory and motor: visual cortex, precuneus, postcentral gyrus.</span></div></li>
+                  <li><svg class="brain-icon catchup" viewBox="0 0 120 86" role="img" aria-label="Front and side of the brain highlighted"><use href="#brain"/></svg><div><strong>Catches up by adulthood</strong><span>Association: frontal and temporal cortex.</span></div></li>
                 </ul>
-                <p class="note">Dots: autism vs. typical difference (t) per age window, from the paper's Table S8, filled when p &lt; .05 (uncorrected). Lines average five windows. Each age is a different group of people. Brain maps are simplified.</p>
+                <p class="note">Dots are age windows from Table S8, filled when p &lt; .05 (uncorrected). Each age is a different group of people.</p>
               </div>
               <figure class="age-figure">
                 <div class="age-head">
@@ -123,7 +123,7 @@
             <div class="frame split">
               <div class="copy">
                 <h3>Read a mind from its choices.</h3>
-                <p>One of my project's 500 test learners, a simulated agent, matched six images to three keys over 936 trials. Turn the dials until your learner follows its dashed line.</p>
+                <p>A simulated learner matched six images to three keys. Turn the dials until your curve follows its dashed line.</p>
                 <div class="dials">
                   <label><span>Learning rate <i>α</i><output id="alpha-out">0.50</output></span><input id="alpha" type="range" min="0.2" max="0.8" step="0.01" value="0.5"></label>
                   <label><span>Consistency <i>β</i><output id="beta-out">10.0</output></span><input id="beta" type="range" min="4" max="16" step="0.1" value="10"></label>
@@ -145,13 +145,13 @@
                   <div class="sbi-legend" aria-hidden="true"><span class="key-target" id="sbi-key-target">Test learner</span><span class="key-yours">Your learner</span><span class="key-network" hidden>My network</span></div>
                 </div>
                 <div class="reveal" id="sbi-reveal-panel" aria-live="polite">
-                  <p class="reveal-hint">Match the dashed line, then reveal the parameters: the truth, your dials, and what my network inferred from the same 936 trials.</p>
+                  <p class="reveal-hint">Then reveal the truth and what my network inferred.</p>
                   <table class="reveal-table" hidden>
                     <thead><tr><th scope="col"><span class="sr-only">Source</span></th><th scope="col">α</th><th scope="col">β</th><th scope="col">φ</th><th scope="col">κ</th><th scope="col">Fit</th></tr></thead>
                     <tbody></tbody>
                   </table>
                 </div>
-                <p class="note">Your curve: 300 blocks of the project's model, simulated in your browser. Network: a GRU trained on 27,000 simulated learners. Across all 500 test learners it recovers α, β, φ, κ with r = .81, .79, .89, .98. Unpublished, preliminary results, for reference only.</p>
+                <p class="note">On 500 test learners the network recovers α, β, φ, κ at r = .81, .79, .89, .98. Preliminary, for reference only.</p>
               </figure>
             </div>
             <footer class="caption">
