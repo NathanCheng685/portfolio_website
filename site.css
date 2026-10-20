@@ -18,7 +18,7 @@
   --orange: #e0782f;
   /* character art: pixel (fallback) or illustrated (default, set on <html>) */
   --sprite: url("assets/nathan-sprite.svg");
-  --cw: 64; --ch: 88; --frames: 19;
+  --cw: 64; --ch: 88; --frames: 19; --pitch: 64; --gutter: 0;
   --px: 1.5; --rail-px: 1.5; --card-px: 1;
   --grip-x: 33; --grip-y: 32; --foot-blank: 1;
   --lead: 18px; --indent: 104px; --readout-x: 50px; --readout-flip: 50px;
@@ -68,12 +68,12 @@ button:disabled { cursor: default; }
 /* Sprite */
 html[data-art="illustrated"] {
   --sprite: url("assets/nathan-illustrated.svg");
-  --cw: 160; --ch: 210; --frames: 23;
+  --cw: 160; --ch: 210; --frames: 23; --pitch: 176; --gutter: 8; /* blank gutters between frames, see build_illustration.py */
   --px: 0.72; --rail-px: 0.62; --card-px: 0.44;
   --grip-x: 103.9; --grip-y: 5.3; --foot-blank: 6;
   --lead: 28px; --indent: 92px; --readout-x: 14px; --readout-flip: 40px;
 }
-.actor { --f: 0; display: block; flex: none; width: calc(var(--cw) * var(--px) * 1px); height: calc(var(--ch) * var(--px) * 1px); background: var(--sprite) no-repeat; background-size: calc(var(--cw) * var(--frames) * var(--px) * 1px) 100%; background-position: calc(var(--f) * var(--cw) * var(--px) * -1px) 0; image-rendering: pixelated; }
+.actor { --f: 0; display: block; flex: none; width: calc(var(--cw) * var(--px) * 1px); height: calc(var(--ch) * var(--px) * 1px); background: var(--sprite) no-repeat; background-size: calc(var(--pitch) * var(--frames) * var(--px) * 1px) 100%; background-position: calc((var(--f) * var(--pitch) + var(--gutter)) * var(--px) * -1px) 0; image-rendering: pixelated; }
 html[data-art="illustrated"] .actor { image-rendering: auto; }
 .actor.is-left { transform: scaleX(-1); }
 
@@ -283,10 +283,16 @@ input[type="range"]:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 4px rgb(
 .gamble-legend .key-gpt::before { background: linear-gradient(90deg, #c3a6ea, #532694); }
 .gamble-empty { position: absolute; left: 8px; right: 40px; top: 42%; text-align: center; font-size: 13px; color: var(--faint); pointer-events: none; }
 .has-pick .gamble-empty { display: none; }
-.gamble-panel { display: grid; gap: 7px; min-height: 84px; }
+.gamble-panel { display: grid; align-content: start; gap: 6px; min-height: 52px; }
 .panel-take { font-size: 13.5px; line-height: 1.45; color: var(--ink); }
-.panel-quote { font-size: 12.5px; line-height: 1.45; color: var(--muted); padding-left: 10px; border-left: 2px solid var(--line); }
-.panel-quote span { display: block; font: 10.5px/1.5 var(--mono); color: var(--faint); }
+.panel-quote { font-size: 12.5px; line-height: 1.45; color: var(--muted); }
+.panel-quote summary { width: max-content; font: 11px/1.6 var(--mono); color: var(--faint); cursor: pointer; list-style: none; }
+.panel-quote summary::-webkit-details-marker { display: none; }
+.panel-quote summary::after { content: " +"; }
+.panel-quote[open] summary::after { content: " −"; }
+.panel-quote summary:hover { color: var(--ink); }
+.panel-quote summary:focus-visible { outline: 2px solid var(--muted); outline-offset: 2px; }
+.panel-quote p { margin-top: 4px; padding-left: 10px; border-left: 2px solid var(--line); }
 
 /* SmartCited */
 .smart-demo { display: flex; flex-direction: column; gap: 14px; min-height: 0; }

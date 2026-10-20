@@ -6,7 +6,9 @@ bangs with a 4:6 side part, black leather shoes. Shapes are angular with hard tw
 sharp; a light grain gives a painted surface. Every frame is posed from a small
 skeleton of joint angles.
 
-Output: assets/nathan-illustrated.svg, one row of CELL_W x CELL_H cells.
+Output: assets/nathan-illustrated.svg, one row of CELL_W x CELL_H cells, each with a
+blank GUTTER on both sides (the page shows only the CELL_W window, see site.css), and
+assets/favicon.svg.
 Frames 0 to 18 match the pixel atlas order (F in sprite.js); frames 19 to 22
 are the second half of the 8-frame run cycle.
 
@@ -16,7 +18,12 @@ import math
 from pathlib import Path
 
 CELL_W, CELL_H = 160, 210
-CELL_INSET = 3
+# Blank space on each side of every frame. Browsers scale the atlas with filters that
+# can reach a few pixels across a cell edge (iOS Safari more than desktop), so a pose
+# drawn near its edge would show as a stray mark beside the next frame. The page
+# steps by PITCH and offsets by GUTTER (--pitch and --gutter in site.css).
+GUTTER = 8
+PITCH = CELL_W + 2 * GUTTER
 FLOOR = 204
 HIP_X = 80
 
@@ -315,11 +322,9 @@ for i in range(4, 8):
 
 
 def svg():
-    width = CELL_W * len(FRAMES)
-    # Each cell is clipped 3 units inside its edges: when the browser scales the atlas, a
-    # drawing that touched the edge would show as a stray pixel beside the next frame.
-    clips = "".join(f'<clipPath id="c{i}"><rect x="{i * CELL_W + CELL_INSET}" y="0" width="{CELL_W - 2 * CELL_INSET}" height="{CELL_H}"/></clipPath>' for i in range(len(FRAMES)))
-    body_svg = "".join(f'<g clip-path="url(#c{i})"><g transform="translate({i * CELL_W} 0)">{content}</g></g>' for i, (_, content) in enumerate(FRAMES))
+    width = PITCH * len(FRAMES)
+    clips = "".join(f'<clipPath id="c{i}"><rect x="{i * PITCH + GUTTER}" y="0" width="{CELL_W}" height="{CELL_H}"/></clipPath>' for i in range(len(FRAMES)))
+    body_svg = "".join(f'<g clip-path="url(#c{i})"><g transform="translate({i * PITCH + GUTTER} 0)">{content}</g></g>' for i, (_, content) in enumerate(FRAMES))
     grain = (f'<filter id="grain" x="0" y="0" width="{width}" height="{CELL_H}" filterUnits="userSpaceOnUse">'
              '<feTurbulence type="fractalNoise" baseFrequency="1.3" numOctaves="1" seed="9" result="noise"/>'
              '<feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 -0.2" result="speck"/>'
@@ -329,9 +334,29 @@ def svg():
             f'<defs>{grain}{clips}</defs><g filter="url(#grain)">{body_svg}</g></svg>\n')
 
 
+def favicon():
+    """The tab icon: the character's head in profile on the page color, 64 x 64."""
+    import re
+    parts, _ = head((0.0, 0.0), 2)
+    hair = next(p for p in parts if HAIR in p)
+    pts = [(float(x), float(y)) for x, y in re.findall(r"(-?\d+\.\d)[ ,](-?\d+\.\d)", hair)]
+    face = [(float(x), float(y)) for p in parts if f'fill="{SKIN}"' in p for x, y in re.findall(r"(-?\d+\.\d)[ ,](-?\d+\.\d)", p)]
+    top = min(y for _, y in pts)
+    left = min(x for x, _ in pts + face)
+    right = max(x for x, _ in pts + face)
+    k = 42 / (right - left)  # hair and face fill most of the tile; the neck runs off the bottom
+    dx = 32 - (left + right) / 2 * k
+    dy = 10 - top * k
+    return ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">'
+            '<defs><clipPath id="tile"><rect width="64" height="64" rx="14"/></clipPath></defs>'
+            '<g clip-path="url(#tile)"><rect width="64" height="64" fill="#e8e8e4"/>'
+            f'<g transform="translate({f(dx)} {f(dy)}) scale({k:.3f})">{"".join(parts)}</g></g></svg>\n')
+
+
 if __name__ == "__main__":
     target = Path(__file__).resolve().parent.parent / "assets" / "nathan-illustrated.svg"
     target.write_text(svg())
-    print(f"{target.name}: {len(FRAMES)} frames of {CELL_W} x {CELL_H}, {target.stat().st_size} bytes")
+    (target.parent / "favicon.svg").write_text(favicon())
+    print(f"{target.name}: {len(FRAMES)} frames of {CELL_W} x {CELL_H} at a pitch of {PITCH}, {target.stat().st_size} bytes")
     hand = grip_info["near_hand"]
     print(f"grip hand at x={hand[0]:.1f}, y={hand[1]:.1f}")

@@ -86,7 +86,7 @@ export default function llm(card, ctx) {
     const rows = [["People", summary.peopleHigher, PEOPLE, "people"]]
       .concat(SETTINGS.map(([model, level, label, c]) => [label, summary.settings.find(s => s.model === model && s.level === level).higher, c, ""]));
     $("#pilot-rows").innerHTML = rows.map(([label, v, c, cls]) => `<div class="pilot-row ${cls}"><span>${label}</span><i style="--w:${(v * 100).toFixed(1)}%;--c:${c}"></i><b>${pct(v)}</b></div>`).join("");
-    $("#pilot-line").textContent = `Reasoning pushed both models to the higher average. Across gambles, that made them more human on the ${summary.onNorm} where most people take it too, and less human on the ${summary.offNorm} where most do not.`;
+    $("#pilot-line").textContent = "Reasoning picks the higher average. That looks human only where most people pick it too.";
   }
 
   function renderOptions() {
@@ -188,9 +188,9 @@ export default function llm(card, ctx) {
     const hi = Math.max(...gpt);
     const gptText = lo === hi ? (lo === 100 ? "every time" : `${lo}% of the time`) : `${lo} to ${hi}% of the time`;
     const verdict = most === h
-      ? "Most people took it too, so here reasoning made Qwen3 more human."
+      ? `Most people also took ${g.options[h].short}, so here reasoning made Qwen3 more human.`
       : `Most people took ${g.options[most].short}, so here reasoning made Qwen3 less human.`;
-    return `Reasoning moved Qwen3 from ${qwen("none")} to ${qwen("thinking")} on ${g.options[h].short}, the higher average; GPT-OSS took it ${gptText}. ${verdict}`;
+    return { short: verdict, long: `Reasoning moved Qwen3 from ${qwen("none")} to ${qwen("thinking")} on ${g.options[h].short}, the higher average; GPT-OSS took it ${gptText}. ${verdict}` };
   }
 
   // The panel depends on the gamble, not on the pick, so it is written once per gamble.
@@ -200,8 +200,8 @@ export default function llm(card, ctx) {
       return;
     }
     const q = gamble().quote;
-    panel.innerHTML = `<p class="panel-take">${escape(takeText())}</p>
-      <blockquote class="panel-quote"><span>GPT-OSS 20B reasoning, ${LEVEL[q.level]}, ${q.tokens} tokens</span>“${escape(q.text)}”</blockquote>`;
+    panel.innerHTML = `<p class="panel-take">${escape(takeText().short)}</p>
+      <details class="panel-quote"><summary>How GPT-OSS reasoned</summary><p>${q.tokens} tokens, ${LEVEL[q.level]}: “${escape(q.text)}”</p></details>`;
   }
 
   // The one live region: the numbers on every pick, the takeaway on the first.
@@ -213,7 +213,7 @@ export default function llm(card, ctx) {
       return;
     }
     const share = (model, level) => pct(setting(g, model, level).shares[pick]);
-    desc.textContent = `You took ${g.options[pick].short}. So did ${pct(g.people.shares[pick])} of ${g.people.choices} choices by ${g.people.people} people, five each. Qwen3 32B: ${share("qwen3-32b", "none")} without reasoning, ${share("qwen3-32b", "thinking")} with it. GPT-OSS 20B: ${share("gpt-oss-20b", "low")}, ${share("gpt-oss-20b", "medium")} and ${share("gpt-oss-20b", "high")} at low, medium and high effort.${withTake ? ` ${takeText()}` : ""}`;
+    desc.textContent = `You took ${g.options[pick].short}. So did ${pct(g.people.shares[pick])} of ${g.people.choices} choices by ${g.people.people} people, five each. Qwen3 32B: ${share("qwen3-32b", "none")} without reasoning, ${share("qwen3-32b", "thinking")} with it. GPT-OSS 20B: ${share("gpt-oss-20b", "low")}, ${share("gpt-oss-20b", "medium")} and ${share("gpt-oss-20b", "high")} at low, medium and high effort.${withTake ? ` ${takeText().long}` : ""}`;
   }
 
   function choose(i) {
