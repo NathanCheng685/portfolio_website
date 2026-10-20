@@ -14,10 +14,10 @@ content edit and leave GitHub behind.
 
 ## Main portfolio
 
-The main portfolio consists of:
-
-- `index.html`
-- `assets/`
+The main portfolio consists of the entries listed in `portfolio_entries` in
+`scripts/deploy-site.sh`: `index.html`, `site.css`, `site.js`, `sprite.js`,
+`models.js`, `scenes/`, `data/` and `assets/`. Scripts use the `.js` extension
+because the server's Nginx MIME table has no entry for `.mjs`.
 
 Validate a deployable package without changing production:
 

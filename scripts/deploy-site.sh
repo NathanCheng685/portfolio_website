@@ -23,16 +23,18 @@ repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 archive_dir="$(mktemp -d)"
 trap 'rm -rf "$archive_dir"' EXIT
 
+# Everything the main portfolio serves at the domain root. Only these entries are
+# replaced on the server; small sites and other folders there are left alone.
+portfolio_entries=(index.html site.css site.js sprite.js models.js scenes data assets)
+
 if [[ "$site" == "portfolio" ]]; then
-  [[ -f "$repo_root/index.html" ]] || {
-    echo "Missing index.html for portfolio"
-    exit 1
-  }
-  [[ -d "$repo_root/assets" ]] || {
-    echo "Missing assets/ for portfolio"
-    exit 1
-  }
-  tar -C "$repo_root" -czf "$archive_dir/site.tar.gz" index.html assets
+  for entry in "${portfolio_entries[@]}"; do
+    [[ -e "$repo_root/$entry" ]] || {
+      echo "Missing $entry for portfolio"
+      exit 1
+    }
+  done
+  tar -C "$repo_root" -czf "$archive_dir/site.tar.gz" "${portfolio_entries[@]}"
   public_url="https://nathanchengyi.com/"
 else
   if [[ ! "$site" =~ ^[a-z0-9]([a-z0-9-]*[a-z0-9])?$ ]]; then
@@ -101,12 +103,16 @@ sudo tar -xzf "$remote_archive" -C "$stage"
 
 if [[ "$site" == "portfolio" ]]; then
   [[ -f "$stage/index.html" && -d "$stage/assets" ]]
-  [[ -f /var/www/html/index.html ]] &&
-    sudo cp -a /var/www/html/index.html "$backup/index.html"
-  [[ -d /var/www/html/assets ]] &&
-    sudo mv /var/www/html/assets "$backup/assets"
-  sudo mv "$stage/assets" /var/www/html/assets
-  sudo install -m 0644 "$stage/index.html" /var/www/html/index.html
+  # Swap each packaged entry in, keeping the old one in the backup.
+  for entry in "$stage"/*; do
+    name="$(basename "$entry")"
+    if [[ -e "/var/www/html/$name" ]]; then
+      sudo mv "/var/www/html/$name" "$backup/$name"
+    fi
+    sudo mv "$entry" "/var/www/html/$name"
+  done
+  sudo chmod -R u=rwX,go=rX /var/www/html/index.html /var/www/html/site.css /var/www/html/*.js \
+    /var/www/html/scenes /var/www/html/data /var/www/html/assets
 else
   [[ -f "$stage/index.html" ]]
   target="/var/www/html/$site"
