@@ -4,6 +4,8 @@
 
 Source project: `sbi-cognitive-models` (private repository, UC Berkeley CCN Lab, with
 Ti-Fen Pan and Anne Collins; builds on Ti-Fen Pan's DL4CM). Results as of October 2026.
+The tutorial manuscript was submitted to Psychological Methods on November 12, 2026;
+the caption says the GRU was trained on the lab's code, not built from scratch.
 
 - Task and model match the project's simulation (`sbiutils/config.py`, notebook 01,
   DL4CM `PRL` with deterministic feedback and no reversals): six stimuli, three
@@ -58,7 +60,7 @@ into `data/asd-trajectories.json`. Spot-check against the published SI before la
 - Sample: 2,608 participants aged 5.2 to 64.0 (753 ASD and 1,020 TD; 311 ADHD and
   524 TD for the ADHD comparison). Each window is a different group of people.
 
-Caption facts (dates January 2025 to January 2026, the lab's first HPC preprocessing
+Caption facts (dates January 2025 to May 2026, set by Nathan on November 16, 2026, the lab's first HPC preprocessing
 pipeline, about 3,200 subject records, drafted Methods subsections) come from
 Nathan's recommender brief for Prof. Fan Cao.
 
@@ -66,7 +68,9 @@ Nathan's recommender brief for Prof. Fan Cao.
 
 Source project: `cot-human-likeness` (private repository; honors thesis, HKU
 Machine-Augmented Cognition Lab, supervisor Prof. Jian-Qiao Zhu). Pilot 1 ran on
-October 11, 2026 and was analyzed by task on October 18; the full run is deferred.
+October 11, 2026 and was analyzed by task on October 18. The card's data are still
+the pilot's. The caption numbers (15,279 questions, nine tasks, five open models) are
+the full run of October 25, 2026, from the vault note `研究流程与结果`.
 `scripts/export_gambles.py` writes `data/llm-gambles.json` from the repository's
 `data/eml/peterson2021using/exp1/` (items, people's choices) and
 `results/runs/items/<model>/<level>/` (scores and replies). Nothing is generated live.
