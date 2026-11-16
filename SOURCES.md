@@ -117,8 +117,9 @@ the full run of October 25, 2026, from the vault note `研究流程与结果`.
 ## Products
 
 - [SmartCited](https://smartcited.com/#/scan/sample): the café, its website, the
-  review and the AI answers are fictional. The 62.7% of 630 answers figure is from the
-  root site's description of the SmartCited study. The demo never publishes anything.
+  review and the AI answers are fictional. The 62.7% figure is from the
+  SmartCited study of 630 AI answers. The count is no longer shown on the site
+  (Nathan, November 16, 2026); the classic page no longer cites the study. The demo never publishes anything.
 - [CookTree](https://cooktree-webmcp.vercel.app/): the two recipes and the ingredient
   tree are a local sketch of the concept. No Agent, WebMCP call, cart or purchase.
   Source: <https://github.com/aliccee/cooktree-webmcp>.
