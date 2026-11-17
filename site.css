@@ -95,6 +95,8 @@ html[data-art="illustrated"] .actor { image-rendering: auto; }
 .caption h2 + p { margin-top: 3px; font-size: 14px; line-height: 1.4; color: var(--muted); max-width: 70ch; }
 .caption-link { flex: none; font-size: 14px; padding: 6px 0; border-bottom: 1px solid var(--line); }
 .caption-link:hover { border-color: var(--ink); }
+.caption p a { border-bottom: 1px solid var(--line); }
+.caption p a:hover { border-color: var(--ink); }
 
 .button { display: inline-flex; align-items: center; gap: 6px; padding: 9px 14px; border-radius: 999px; font-size: 14px; border: 1px solid var(--line); background: var(--card); transition: background 160ms, border-color 160ms, transform 120ms; }
 .button:hover:not(:disabled) { border-color: var(--ink); }
