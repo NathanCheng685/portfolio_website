@@ -4,7 +4,8 @@
 
 Source project: `sbi-cognitive-models` (private repository, UC Berkeley CCN Lab, with
 Ti-Fen Pan and Anne Collins; builds on Ti-Fen Pan's DL4CM). Results as of October 2026.
-The tutorial manuscript was submitted to Psychological Methods on November 12, 2026;
+The tutorial manuscript was submitted to Psychological Methods on November 12, 2026, and
+its preprint is arXiv:2611.17608 (https://arxiv.org/abs/2611.17608);
 the caption says the GRU was trained on the lab's code, not built from scratch.
 
 - Task and model match the project's simulation (`sbiutils/config.py`, notebook 01,
